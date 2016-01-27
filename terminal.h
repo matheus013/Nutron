@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-class Terminal
-{
+class Terminal {
+
 public:
     Terminal();
 };

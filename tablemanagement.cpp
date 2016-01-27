@@ -22,13 +22,12 @@ TableManagement::TableManagement(QString nameTable) {
 }
 
 QString TableManagement::buildInsert(QString identifier){
-    QString tag = "INSERT INTO " + nameTable() + " (";
+    QString tag = "INSERT INTO \"" + nameTable() + "\" (";
     const QMetaObject *metaObject = object()->metaObject();
 
     for (int i = 1; i < metaObject->propertyCount(); ++i) {
 
-        QString nameProperty = QString::fromUtf8(metaObject->property(i).name());
-
+        QString nameProperty = QString::fromUtf8(metaObject->property(i).name()).toLower();
         if(nameProperty != identifier){
             tag += nameProperty;
             if(i < metaObject->propertyCount() - 1) tag += ", ";
@@ -51,7 +50,7 @@ QString TableManagement::buildInsert(QString identifier){
 }
 
 QString TableManagement::buildUpdate(QString where){
-    QString tag = "UPDATE " + nameTable() + " SET ";
+    QString tag = "UPDATE \"" + nameTable() + "\" SET ";
     const QMetaObject *metaObject = object()->metaObject();
     for (int i = 1; i < metaObject->propertyCount(); ++i) {
 
@@ -69,12 +68,12 @@ QString TableManagement::buildUpdate(QString where){
 }
 
 QString TableManagement::buildDetele(QString where){
-    return "DELETE FROM " + nameTable() + " WHERE " + where +
+    return "DELETE FROM \"" + nameTable() + "\" WHERE " + where +
             "='" + object()->property(where.toLatin1().constData()).toString() + '\'';
 }
 
 QString TableManagement::buildDetele(QStringList where, QString myOperator){
-    QString tag = "DELETE FROM " + nameTable() + " WHERE ";
+    QString tag = "DELETE FROM \"" + nameTable() + "\" WHERE ";
     for(int i = 0;i < where.length(); ++i){
         tag += where.at(i) +"='"+
                 object()->property(where.at(i).toLatin1().constData()).toString() + '\'';
@@ -88,11 +87,11 @@ QString TableManagement::buildDeleteAll(){
 }
 
 QString TableManagement::buildSelect() {
-    return "SELECT FROM " + nameTable();
+    return "SELECT * FROM " + nameTable();
 }
 
 QString TableManagement::buildCreateTable(){
-    QString tag = "CREATE TABLE IF NOT EXISTS " + nameTable() + " (";
+    QString tag = "CREATE TABLE IF NOT EXISTS \"" + nameTable() + "\" (";
     const QMetaObject *metaObject = object()->metaObject();
     for (int i = 1; i < metaObject->propertyCount(); ++i) {
 

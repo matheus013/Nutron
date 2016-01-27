@@ -1,10 +1,13 @@
-#include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QGuiApplication>
 #include <QQmlContext>
-#include <QList>
 #include <QVariant>
+#include <QDebug>
+#include <QList>
 #include "daobject.h"
 #include "users.h"
+#include "food.h"
+
 
 int main(int argc, char *argv[]){
     //    QGuiApplication app(argc, argv);
@@ -14,6 +17,9 @@ int main(int argc, char *argv[]){
     //    return app.exec();
     DAObject dao;
 
-    dao.insert(new Users("lonesome","matheus23","Matheus I.","matheus.bs@ic.ufal.br",
-                         20,1.8,116));
+//    dao.insert(new Food("frango","gostoso","",1000,"SS"));
+//    Users * master = new Users("mod","123456","Administrador",".9.",0,0,0);
+//    dao.insert(master);
+    dao.loadData("user");
+    qDebug() << dao.getListUsers().count();
 }
