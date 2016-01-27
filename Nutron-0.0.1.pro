@@ -10,19 +10,19 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    myclass.cpp \
     connection.cpp \
     database.cpp \
     tablemanagement.cpp \
     daobject.cpp \
     users.cpp \
-    food.cpp
+    food.cpp \
+    terminal.cpp
 
 HEADERS += \
-    myclass.h \
     connection.h \
     database.h \
     tablemanagement.h \
     daobject.h \
     users.h \
-    food.h
+    food.h \
+    terminal.h

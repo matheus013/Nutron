@@ -17,6 +17,10 @@ TableManagement::TableManagement(QObject *object, QString nameTable){
     setObject(object);
 }
 
+TableManagement::TableManagement(QString nameTable) {
+    setNameTable(nameTable);
+}
+
 QString TableManagement::buildInsert(QString identifier){
     QString tag = "INSERT INTO " + nameTable() + " (";
     const QMetaObject *metaObject = object()->metaObject();
@@ -81,6 +85,10 @@ QString TableManagement::buildDetele(QStringList where, QString myOperator){
 
 QString TableManagement::buildDeleteAll(){
     return "DELETE FROM " + nameTable();
+}
+
+QString TableManagement::buildSelect() {
+    return "SELECT FROM " + nameTable();
 }
 
 QString TableManagement::buildCreateTable(){

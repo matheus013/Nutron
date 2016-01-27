@@ -12,6 +12,7 @@ protected:
 public:
     TableManagement();
     TableManagement(QObject * object, QString nameTable = "");
+    TableManagement(QString nameTable);
     QString buildInsert(QString identifier = "id");
     QString buildUpdate(QString where = "id");
     QString buildDetele(QString where = "id");

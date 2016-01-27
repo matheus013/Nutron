@@ -13,7 +13,5 @@ class Food : public QObject {
     QML_WRITABLE_PROPERTY(QString,classification)
 public:
     Food();
-    Food(QString name,QString description, QString image ,int calorificValue);
-    QString toInsert();
-    QString toUpdate();
+    Food(QString name,QString description, QString image ,int calorificValue, QString classification);
 };
