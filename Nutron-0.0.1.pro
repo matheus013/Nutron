@@ -16,9 +16,7 @@ SOURCES += main.cpp \
     tablemanagement.cpp \
     daobject.cpp \
     users.cpp \
-    meat.cpp \
-    food.cpp \
-    person.cpp
+    food.cpp
 
 HEADERS += \
     myclass.h \
@@ -27,6 +25,4 @@ HEADERS += \
     tablemanagement.h \
     daobject.h \
     users.h \
-    meat.h \
-    food.h \
-    person.h
+    food.h

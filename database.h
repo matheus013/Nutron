@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include "QQmlHelpers"
 
 class DatabaseManagement : public QObject {
     Q_OBJECT

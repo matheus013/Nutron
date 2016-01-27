@@ -1,6 +1,7 @@
 #pragma once
+
 #include <QObject>
-#include <QQmlHelpers>
+#include "QQmlHelpers"
 
 class Food : public QObject {
     Q_OBJECT
@@ -9,6 +10,7 @@ class Food : public QObject {
     QML_WRITABLE_PROPERTY(QString,description)
     QML_WRITABLE_PROPERTY(int,calorificValue)
     QML_WRITABLE_PROPERTY(QString, image)
+    QML_WRITABLE_PROPERTY(QString,classification)
 public:
     Food();
     Food(QString name,QString description, QString image ,int calorificValue);
