@@ -9,6 +9,7 @@ public:
     Authenticate();
     bool isEmailAddress(QString email);
     bool loginIsValid(QString username,QString password);
+    bool usernameExists(QString username);
 
 };
 

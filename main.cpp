@@ -18,6 +18,6 @@ int main(int argc, char *argv[]){
     //    return app.exec();
     Terminal console;
     Authenticate a;
-    qDebug() << a.loginIsValid("lonesome","matheus230");
+    qDebug() << a.usernameExists("lonesome013");
 
 }
