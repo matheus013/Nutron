@@ -18,6 +18,3 @@ Users::Users(QString username, QString password, QString name, QString email,
     set_name(name);
 }
 
-//bool Users::operator <(const Users &user) {
-//    return get_score() < user.get_score();
-//}

@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     daobject.cpp \
     users.cpp \
     food.cpp \
-    terminal.cpp
+    terminal.cpp \
+    authenticate.cpp
 
 HEADERS += \
     connection.h \
@@ -25,4 +26,5 @@ HEADERS += \
     daobject.h \
     users.h \
     food.h \
-    terminal.h
+    terminal.h \
+    authenticate.h

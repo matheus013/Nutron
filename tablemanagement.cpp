@@ -45,7 +45,6 @@ QString TableManagement::buildInsert(QString identifier){
             else tag += ')';
         }
     }
-    qDebug() << tag;
     return tag;
 }
 

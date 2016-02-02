@@ -10,12 +10,19 @@ class Terminal {
     QList<QObject*> userList;
     QList<QObject*> foodList;
     DAObject daobject;
+    static bool lessRank(const QObject *a,const QObject *b);
 public:
     Terminal();
+    void insertUser(QString username, QString password, QString name, int age, double height,
+                    double weight, QString email);
+    void insertFood(QString name, QString description, int calorificvalue, QString image,
+                    QString classification);
     void loadUser();
     void loadFood();
     void saveUser();
     void saveFood();
+    void printUser();
+    void printFood();
 
 };
 
