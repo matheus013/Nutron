@@ -1,12 +1,12 @@
 #include "users.h"
 
 Users::Users(){
-    setObjectName("Users");
+    setObjectName("nutron_users");
 }
 
 Users::Users(QString username, QString password, QString name, QString email,
              int age, double height, double weight){
-    setObjectName("user");
+    setObjectName("nutron_user");
     set_level(0);
     set_score(0);
     set_username(username);

@@ -7,6 +7,7 @@
 #include "daobject.h"
 #include "users.h"
 #include "food.h"
+#include "terminal.h"
 
 
 int main(int argc, char *argv[]){
@@ -15,11 +16,9 @@ int main(int argc, char *argv[]){
     //    QQmlContext *ctx = engine.rootContext();
     //    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     //    return app.exec();
-    DAObject dao;
+    Terminal console;
 
-//    dao.insert(new Food("frango","gostoso","",1000,"SS"));
-//    Users * master = new Users("mod","123456","Administrador",".9.",0,0,0);
-//    dao.insert(master);
-    dao.loadData("user");
-    qDebug() << dao.getListUsers().count();
+    console.loadUser();
+
+
 }

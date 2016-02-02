@@ -1,12 +1,12 @@
 #include "food.h"
 
 Food::Food(){
-    setObjectName("food");
+    setObjectName("nutron_food");
 }
 
 Food::Food(QString name, QString description, QString image,
            int calorificValue, QString classification){
-    setObjectName("food");
+    setObjectName("nutron_food");
     set_name(name);
     set_calorificValue(calorificValue);
     set_description(description);

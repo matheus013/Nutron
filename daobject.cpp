@@ -9,22 +9,10 @@
 #include "tablemanagement.h"
 #include "users.h"
 
-QList<Users *> DAObject::getListUsers() const {
-    return listUsers;
-}
-
-QList<QObject *> DAObject::getListFoods() const {
-    return listFoods;
-}
-
 DAObject::DAObject(){
     connection = new Connection("data","postgres","senha","localhost","QPSQL");
     connection->startConnection();
     if(connection->getDataConnection().isOpen()) qDebug() << "Successfully connected!";
-}
-
-DAObject::DAObject(QPriorityQueue<Users *> list){
-    DAObject();
 }
 
 void DAObject::insert(QObject *object){
@@ -79,15 +67,3 @@ void DAObject::customCommand(QString textQuery){
     else qDebug() << "Successfully completed operation!";
 }
 
-void DAObject::loadData(QString nameTable){
-    listUsers.clear();
-    TableManagement sql(nameTable);
-    QSqlQuery query(sql.buildSelect());
-    QSqlRecord rec = query.record();
-
-    while(query.next()){
-        qDebug() << query.value(0);
-
-    }
-    //sort list users here
-}
