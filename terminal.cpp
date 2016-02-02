@@ -40,16 +40,25 @@ void Terminal::loadFood() {
     }
     else{
         while(query.next()) {
-
             Food* food = new Food();
             food->set_id(query.value("id").toInt());
             food->set_name(query.value("name").toString());
-            food->set_calorificValue(query.value("calorificvalue").toString());
+            food->set_calorificValue(query.value("calorificvalue").toInt());
             food->set_classification(query.value("classification").toString());
             food->set_description(query.value("description").toString());
             food->set_image(query.value("image").toString());
             userList.append(food);
         }
     }
+}
+
+void Terminal::saveUser() {
+    for (QList<QObject*>::iterator i = userList.begin(); i != userList.end(); ++i)
+        daobject.update(*i);
+}
+
+void Terminal::saveFood() {
+    for (QList<QObject*>::iterator i = foodList.begin(); i != foodList.end(); ++i)
+        daobject.update(*i);
 }
 

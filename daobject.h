@@ -14,8 +14,8 @@ class DAObject : QObject{
 public:
     DAObject();
     void insert(QObject *object);
-    void update(QObject *object, QString where);
-    void remove(QObject *object, QString where);
+    void update(QObject *object, QString where = "id");
+    void remove(QObject *object, QString where = "id");
     void remove(QObject *object, QStringList where, QString myOperator);
     void removeAll(QObject *object);
     void customCommand(QString textQuery);
