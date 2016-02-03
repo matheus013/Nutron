@@ -16,7 +16,7 @@ int main(int argc, char *argv[]){
     console.login("lonesome","matheus23");
 //    console.logout();
     qDebug() << console.isOpen();
-
+    console.selectFood(7);
+    console.registerMeal();
 }
-
 

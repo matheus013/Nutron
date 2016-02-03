@@ -10,7 +10,8 @@ class Terminal {
     QList<QObject*> userList;
     QList<QObject*> foodList;
     DAObject daobject;
-    Users *current;
+    Users *currentUser;
+    Food * selectedFood;
     bool sessionOpen;
 
     static bool lessRank(const QObject *a,const QObject *b);
@@ -30,9 +31,11 @@ public:
     bool login(QString username, QString password);
     void logout();
 
+    bool selectFood(int id);
+
     void printCurrent();
 
-    bool registerMeal(Users * user,Food *food);
+    bool registerMeal();
 
     bool isOpen() const;
 };

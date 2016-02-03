@@ -4,6 +4,7 @@
 #include <QVariant>
 #include "terminal.h"
 #include "authenticate.h"
+#include "meal.h"
 
 bool Terminal::isOpen() const{
     return sessionOpen;
@@ -14,7 +15,7 @@ bool Terminal::lessRank(const QObject *a, const QObject *b){
 }
 
 Terminal::Terminal() {
-    current = 0;
+    currentUser = 0;
     sessionOpen = false;
     loadFood();
     loadUser();
@@ -101,21 +102,39 @@ Users *Terminal::at(QString username) {
 bool Terminal::login(QString username, QString password) {
     Authenticate validate;
     if(!validate.loginIsValid(username,password)) return sessionOpen;
-    current = at(username);
+    currentUser = at(username);
     sessionOpen = true;
     return sessionOpen;
 }
 
 void Terminal::logout() {
-    current = new Users();
+    currentUser = new Users();
     sessionOpen = false;
+}
+
+bool Terminal::selectFood(int id) {
+    for (QList<QObject*>::iterator i = foodList.begin(); i != foodList.end(); ++i)
+        if((*i)->property("id").toInt() == id){
+            selectedFood = (Food*)(*i);
+            return true;
+        }
+    return false;
 }
 
 void Terminal::printCurrent() {
     if(isOpen()){
-        qDebug() << current->get_name()
-                 << current->get_username()
-                 << current->get_score();
+        qDebug() << currentUser->get_name()
+                 << currentUser->get_username()
+                 << currentUser->get_score();
     }else qDebug() << "there is no open session";
+}
+
+bool Terminal::registerMeal() {
+    if(!isOpen()) return false;
+    QDateTime local(QDateTime::currentDateTime());
+    QString format = "t hh:mm:ss dd-MM-yyyy";
+    Meal *meal = new Meal(local.toString(format),currentUser->get_id(),selectedFood->get_id());
+    daobject.insert(meal);
+    return true;
 }
 

@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     food.cpp \
     terminal.cpp \
     authenticate.cpp \
-    meal.cpp
+    meal.cpp \
+    action.cpp
 
 HEADERS += \
     connection.h \
@@ -29,4 +30,5 @@ HEADERS += \
     food.h \
     terminal.h \
     authenticate.h \
-    meal.h
+    meal.h \
+    action.h
