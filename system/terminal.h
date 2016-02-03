@@ -2,9 +2,9 @@
 
 #include <QObject>
 #include <QList>
-#include "users.h"
-#include "food.h"
-#include "daobject.h"
+#include "../objects/users.h"
+#include "../objects/food.h"
+#include "../bd/daobject.h"
 
 class Terminal : public QObject {
     Q_OBJECT

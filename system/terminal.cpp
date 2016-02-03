@@ -4,7 +4,7 @@
 #include <QVariant>
 #include "terminal.h"
 #include "authenticate.h"
-#include "meal.h"
+#include "../objects/meal.h"
 
 Terminal::Terminal() {
     m_currentUser = 0;

@@ -7,7 +7,7 @@
 #include "daobject.h"
 #include "connection.h"
 #include "tablemanagement.h"
-#include "users.h"
+#include "../objects/users.h"
 
 DAObject::DAObject(){
     connection = new Connection("data","postgres","senha","localhost","QPSQL");

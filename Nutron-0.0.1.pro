@@ -10,28 +10,28 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    connection.cpp \
-    database.cpp \
-    tablemanagement.cpp \
-    daobject.cpp \
-    users.cpp \
-    food.cpp \
-    terminal.cpp \
-    authenticate.cpp \
-    meal.cpp \
-    action.cpp
+    bd/connection.cpp \
+    bd/database.cpp \
+    bd/tablemanagement.cpp \
+    bd/daobject.cpp \
+    objects/users.cpp \
+    objects/food.cpp \
+    system/terminal.cpp \
+    system/authenticate.cpp \
+    objects/meal.cpp \
+    system/action.cpp
 
 HEADERS += \
-    connection.h \
-    database.h \
-    tablemanagement.h \
-    daobject.h \
-    users.h \
-    food.h \
-    terminal.h \
-    authenticate.h \
-    meal.h \
-    action.h
+    bd/connection.h \
+    bd/database.h \
+    bd/tablemanagement.h \
+    bd/daobject.h \
+    objects/users.h \
+    objects/food.h \
+    system/terminal.h \
+    system/authenticate.h \
+    objects/meal.h \
+    system/action.h
 
 RESOURCES += \
     qrc.qrc

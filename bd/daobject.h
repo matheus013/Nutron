@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QList>
 #include "connection.h"
-#include "users.h"
+#include "../objects/users.h"
 
 
 class DAObject : QObject{
