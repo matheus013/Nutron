@@ -6,17 +6,12 @@
 #include "terminal.h"
 
 int main(int argc, char *argv[]){
-    //    QGuiApplication app(argc, argv);
-    //    QQmlApplicationEngine engine;
-    //    QQmlContext *ctx = engine.rootContext();
-    //    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    //    return app.exec();
+    QGuiApplication app(argc, argv);
+    QQmlApplicationEngine engine;
+    QQmlContext *ctx = engine.rootContext();
     Terminal console;
-//    console.printCurrent();
-    console.login("lonesome","matheus23");
-//    console.logout();
-    qDebug() << console.isOpen();
-    console.selectFood(7);
-    console.registerMeal();
+    ctx->setContextProperty("_console",&console);
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    return app.exec();
 }
 

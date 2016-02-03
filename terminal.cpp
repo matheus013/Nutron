@@ -6,19 +6,19 @@
 #include "authenticate.h"
 #include "meal.h"
 
+Terminal::Terminal() {
+    m_currentUser = 0;
+    sessionOpen = false;
+    loadFood();
+    loadUser();
+}
+
 bool Terminal::isOpen() const{
     return sessionOpen;
 }
 
 bool Terminal::lessRank(const QObject *a, const QObject *b){
     return a->property("score") > b->property("score");
-}
-
-Terminal::Terminal() {
-    currentUser = 0;
-    sessionOpen = false;
-    loadFood();
-    loadUser();
 }
 
 void Terminal::insertUser(QString username, QString password, QString name,
@@ -35,10 +35,9 @@ void Terminal::insertFood(QString name, QString description, int calorificvalue,
     loadFood();
 }
 
-
 void Terminal::loadUser() {
     QSqlQuery query;
-    userList.clear();
+    m_userList.clear();
     query.prepare( "SELECT * FROM nutron_user" );
     if(!query.exec()) {
         qDebug() << query.lastError();
@@ -56,10 +55,10 @@ void Terminal::loadUser() {
             user->set_password(query.value("password").toString());
             user->set_score(query.value("score").toInt());
             user->set_weight(query.value("weight").toDouble());
-            userList.append(user);
+            m_userList.append(user);
         }
     }
-    qSort(userList.begin(),userList.end(),Terminal::lessRank);
+    qSort(m_userList.begin(),m_userList.end(),Terminal::lessRank);
 }
 
 void Terminal::loadFood() {
@@ -78,23 +77,24 @@ void Terminal::loadFood() {
             food->set_classification(query.value("classification").toString());
             food->set_description(query.value("description").toString());
             food->set_image(query.value("image").toString());
-            foodList.append(food);
+            m_foodList.append(food);
+
         }
     }
 }
 
 void Terminal::saveUser() {
-    for (QList<QObject*>::iterator i = userList.begin(); i != userList.end(); ++i)
+    for (QList<QObject*>::iterator i = m_userList.begin(); i != m_userList.end(); ++i)
         daobject.update(*i);
 }
 
 void Terminal::saveFood() {
-    for (QList<QObject*>::iterator i = foodList.begin(); i != foodList.end(); ++i)
+    for (QList<QObject*>::iterator i = m_foodList.begin(); i != m_foodList.end(); ++i)
         daobject.update(*i);
 }
 
 Users *Terminal::at(QString username) {
-    for (QList<QObject*>::iterator i = userList.begin(); i != userList.end(); ++i)
+    for (QList<QObject*>::iterator i = m_userList.begin(); i != m_userList.end(); ++i)
         if((*i)->property("username").toString() == username) return (Users*)(*i);
     return new Users();
 }
@@ -102,20 +102,20 @@ Users *Terminal::at(QString username) {
 bool Terminal::login(QString username, QString password) {
     Authenticate validate;
     if(!validate.loginIsValid(username,password)) return sessionOpen;
-    currentUser = at(username);
+    m_currentUser = at(username);
     sessionOpen = true;
     return sessionOpen;
 }
 
 void Terminal::logout() {
-    currentUser = new Users();
+    m_currentUser = new Users();
     sessionOpen = false;
 }
 
 bool Terminal::selectFood(int id) {
-    for (QList<QObject*>::iterator i = foodList.begin(); i != foodList.end(); ++i)
+    for (QList<QObject*>::iterator i = m_foodList.begin(); i != m_foodList.end(); ++i)
         if((*i)->property("id").toInt() == id){
-            selectedFood = (Food*)(*i);
+            m_selectedFood = (Food*)(*i);
             return true;
         }
     return false;
@@ -123,9 +123,9 @@ bool Terminal::selectFood(int id) {
 
 void Terminal::printCurrent() {
     if(isOpen()){
-        qDebug() << currentUser->get_name()
-                 << currentUser->get_username()
-                 << currentUser->get_score();
+        qDebug() << m_currentUser->get_name()
+                 << m_currentUser->get_username()
+                 << m_currentUser->get_score();
     }else qDebug() << "there is no open session";
 }
 
@@ -133,8 +133,7 @@ bool Terminal::registerMeal() {
     if(!isOpen()) return false;
     QDateTime local(QDateTime::currentDateTime());
     QString format = "t hh:mm:ss dd-MM-yyyy";
-    Meal *meal = new Meal(local.toString(format),currentUser->get_id(),selectedFood->get_id());
+    Meal *meal = new Meal(local.toString(format),m_currentUser->get_id(),m_selectedFood->get_id());
     daobject.insert(meal);
     return true;
 }
-

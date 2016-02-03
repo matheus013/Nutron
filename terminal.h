@@ -6,21 +6,23 @@
 #include "food.h"
 #include "daobject.h"
 
-class Terminal {
-    QList<QObject*> userList;
-    QList<QObject*> foodList;
+class Terminal : public QObject {
+    Q_OBJECT
+    QML_WRITABLE_PROPERTY(QList<QObject*>, userList)
+    QML_WRITABLE_PROPERTY(QList<QObject*>, foodList)
+    QML_WRITABLE_PROPERTY(Users*, currentUser)
+    QML_WRITABLE_PROPERTY(Food*, selectedFood)
     DAObject daobject;
-    Users *currentUser;
-    Food * selectedFood;
     bool sessionOpen;
 
     static bool lessRank(const QObject *a,const QObject *b);
     Users *at(QString username);
 public:
     Terminal();
-    void insertUser(QString username, QString password, QString name, int age, double height,
+
+    Q_INVOKABLE void insertUser(QString username, QString password, QString name, int age, double height,
                     double weight, QString email);
-    void insertFood(QString name, QString description, int calorificvalue, QString image,
+    Q_INVOKABLE void insertFood(QString name, QString description, int calorificvalue, QString image,
                     QString classification);
 
     void loadUser();
@@ -28,15 +30,15 @@ public:
     void saveUser();
     void saveFood();
 
-    bool login(QString username, QString password);
-    void logout();
+    Q_INVOKABLE bool login(QString username, QString password);
+    Q_INVOKABLE void logout();
 
-    bool selectFood(int id);
+    Q_INVOKABLE bool selectFood(int id);
 
     void printCurrent();
 
-    bool registerMeal();
+    Q_INVOKABLE bool registerMeal();
 
-    bool isOpen() const;
+    Q_INVOKABLE bool isOpen() const;
 };
 

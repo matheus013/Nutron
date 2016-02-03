@@ -7,9 +7,9 @@ class Authenticate : public QObject {
     Q_OBJECT
 public:
     Authenticate();
-    bool isEmailAddress(QString email);
+    Q_INVOKABLE bool isEmailAddress(QString email);
     bool loginIsValid(QString username,QString password);
-    bool usernameExists(QString username);
+    Q_INVOKABLE bool usernameExists(QString username);
 
 };
 

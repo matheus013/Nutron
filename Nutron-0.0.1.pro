@@ -32,3 +32,6 @@ HEADERS += \
     authenticate.h \
     meal.h \
     action.h
+
+RESOURCES += \
+    qrc.qrc
