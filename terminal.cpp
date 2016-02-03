@@ -16,6 +16,8 @@ bool Terminal::lessRank(const QObject *a, const QObject *b){
 Terminal::Terminal() {
     current = 0;
     sessionOpen = false;
+    loadFood();
+    loadUser();
 }
 
 void Terminal::insertUser(QString username, QString password, QString name,

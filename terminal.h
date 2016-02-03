@@ -32,6 +32,8 @@ public:
 
     void printCurrent();
 
+    bool registerMeal(Users * user,Food *food);
+
     bool isOpen() const;
 };
 
