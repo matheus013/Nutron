@@ -17,7 +17,13 @@ int main(int argc, char *argv[]){
     //    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     //    return app.exec();
     Terminal console;
-    Authenticate a;
-    qDebug() << a.usernameExists("lonesome013");
+    console.loadUser();
+//    console.printCurrent();
+    console.login("lonesome","matheus23");
+//    console.logout();
+    qDebug() << console.isOpen();
+    console.printCurrent();
 
 }
+
+

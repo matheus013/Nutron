@@ -18,7 +18,9 @@ class Users : public QObject{
 
 public:
     Users();
+    Users(const QObject* object);
     Users(QString username, QString password, QString name, QString email,
           int age, double height, double weight);
+    bool isEmpty();
 
 };

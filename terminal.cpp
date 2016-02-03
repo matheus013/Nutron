@@ -1,14 +1,21 @@
-#include "terminal.h"
 #include <QSqlQuery>
 #include <QDebug>
 #include <QSqlError>
 #include <QVariant>
+#include "terminal.h"
+#include "authenticate.h"
+
+bool Terminal::isOpen() const{
+    return sessionOpen;
+}
 
 bool Terminal::lessRank(const QObject *a, const QObject *b){
     return a->property("score") > b->property("score");
 }
 
 Terminal::Terminal() {
+    current = 0;
+    sessionOpen = false;
 }
 
 void Terminal::insertUser(QString username, QString password, QString name,
@@ -23,7 +30,6 @@ void Terminal::insertFood(QString name, QString description, int calorificvalue,
     Food * food = new Food(name,description,image,calorificvalue,classification);
     daobject.insert(food);
     loadFood();
-
 }
 
 
@@ -84,15 +90,30 @@ void Terminal::saveFood() {
         daobject.update(*i);
 }
 
-void Terminal::printUser() {
+Users *Terminal::at(QString username) {
     for (QList<QObject*>::iterator i = userList.begin(); i != userList.end(); ++i)
-        qDebug() << (*i)->property("name").toString()
-                 << (*i)->property("score").toInt();
+        if((*i)->property("username").toString() == username) return (Users*)(*i);
+    return new Users();
 }
 
-void Terminal::printFood() {
-    for (QList<QObject*>::iterator i = foodList.begin(); i != foodList.end(); ++i)
-        qDebug() << (*i)->property("name").toString()
-                 << (*i)->property("calorificvalue").toInt();
+bool Terminal::login(QString username, QString password) {
+    Authenticate validate;
+    if(!validate.loginIsValid(username,password)) return sessionOpen;
+    current = at(username);
+    sessionOpen = true;
+    return sessionOpen;
+}
+
+void Terminal::logout() {
+    current = new Users();
+    sessionOpen = false;
+}
+
+void Terminal::printCurrent() {
+    if(isOpen()){
+        qDebug() << current->get_name()
+                 << current->get_username()
+                 << current->get_score();
+    }else qDebug() << "there is no open session";
 }
 
