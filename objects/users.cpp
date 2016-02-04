@@ -33,6 +33,6 @@ Users::Users(QString username, QString password, QString name, QString email,
 }
 
 bool Users::isEmpty() {
-    return get_id() == 0;
+    return get_userid() == 0;
 }
 

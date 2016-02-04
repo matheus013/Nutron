@@ -5,7 +5,7 @@
 
 class Users : public QObject{
     Q_OBJECT
-    QML_WRITABLE_PROPERTY(int, id)
+    QML_WRITABLE_PROPERTY(int, userid)
     QML_WRITABLE_PROPERTY(QString, username)
     QML_WRITABLE_PROPERTY(QString, password)
     QML_WRITABLE_PROPERTY(QString, name)

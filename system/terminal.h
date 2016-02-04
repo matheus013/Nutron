@@ -5,10 +5,11 @@
 #include "../objects/users.h"
 #include "../objects/food.h"
 #include "../bd/daobject.h"
+#include "assets/cpp/qqmlobjectlistmodel.h"
 
 class Terminal : public QObject {
     Q_OBJECT
-    QML_WRITABLE_PROPERTY(QList<QObject*>, userList)
+    QML_OBJMODEL_PROPERTY(Users,userList)
     QML_WRITABLE_PROPERTY(QList<QObject*>, foodList)
     QML_WRITABLE_PROPERTY(Users*, currentUser)
     QML_WRITABLE_PROPERTY(Food*, selectedFood)
@@ -20,10 +21,10 @@ class Terminal : public QObject {
 public:
     Terminal();
 
-    Q_INVOKABLE void insertUser(QString username, QString password, QString name, int age, double height,
-                    double weight, QString email);
-    Q_INVOKABLE void insertFood(QString name, QString description, int calorificvalue, QString image,
-                    QString classification);
+    Q_INVOKABLE void insertUser(QString username, QString password, QString name,
+                                int age, double height, double weight, QString email);
+    Q_INVOKABLE void insertFood(QString name, QString description, int calorificvalue,
+                                QString image, QString classification);
 
     void loadUser();
     void loadFood();

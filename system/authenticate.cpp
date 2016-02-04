@@ -28,7 +28,7 @@ bool Authenticate::loginIsValid(QString username, QString password) {
 }
 
 bool Authenticate::usernameExists(QString username) {
-    if(username.length() <= 6 || username.length() >= 20) return false;
+    if(username.length() < 6 || username.length() > 20) return false;
     QSqlQuery query;
     query.prepare( "SELECT * FROM nutron_user" );
     if(!query.exec())

@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     system/terminal.cpp \
     system/authenticate.cpp \
     objects/meal.cpp \
-    system/action.cpp
+    system/action.cpp \
+    assets/cpp/qqmlobjectlistmodel.cpp
 
 HEADERS += \
     bd/connection.h \
@@ -31,7 +32,8 @@ HEADERS += \
     system/terminal.h \
     system/authenticate.h \
     objects/meal.h \
-    system/action.h
+    system/action.h \
+    assets/cpp/qqmlobjectlistmodel.h
 
 RESOURCES += \
     qrc.qrc

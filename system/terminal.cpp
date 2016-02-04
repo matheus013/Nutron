@@ -8,6 +8,7 @@
 
 Terminal::Terminal() {
     m_currentUser = 0;
+    m_userList = new QQmlObjectListModel<Users>();
     sessionOpen = false;
     loadFood();
     loadUser();
@@ -37,7 +38,7 @@ void Terminal::insertFood(QString name, QString description, int calorificvalue,
 
 void Terminal::loadUser() {
     QSqlQuery query;
-    m_userList.clear();
+    m_userList->clear();
     query.prepare( "SELECT * FROM nutron_user" );
     if(!query.exec()) {
         qDebug() << query.lastError();
@@ -49,16 +50,16 @@ void Terminal::loadUser() {
             user->set_age(query.value("age").toInt());
             user->set_email(query.value("email").toString());
             user->set_height(query.value("height").toDouble());
-            user->set_id(query.value("id").toInt());
+            user->set_userid(query.value("id").toInt());
             user->set_level(query.value("level").toInt());
             user->set_name(query.value("name").toString());
             user->set_password(query.value("password").toString());
             user->set_score(query.value("score").toInt());
             user->set_weight(query.value("weight").toDouble());
-            m_userList.append(user);
+            m_userList->append(user);
         }
     }
-    qSort(m_userList.begin(),m_userList.end(),Terminal::lessRank);
+    qSort(m_userList->begin(),m_userList->end(),Terminal::lessRank);
 }
 
 void Terminal::loadFood() {
@@ -84,8 +85,8 @@ void Terminal::loadFood() {
 }
 
 void Terminal::saveUser() {
-    for (QList<QObject*>::iterator i = m_userList.begin(); i != m_userList.end(); ++i)
-        daobject.update(*i);
+    for (int i = 0; i < m_userList->size(); i++)
+        daobject.update(m_userList->get(i));
 }
 
 void Terminal::saveFood() {
@@ -94,8 +95,9 @@ void Terminal::saveFood() {
 }
 
 Users *Terminal::at(QString username) {
-    for (QList<QObject*>::iterator i = m_userList.begin(); i != m_userList.end(); ++i)
-        if((*i)->property("username").toString() == username) return (Users*)(*i);
+    for (int i = 0; i < m_userList->size(); i++)
+        if((m_userList->get(i))->property("username").toString() == username)
+            return (Users*)(m_userList->get(i));
     return new Users();
 }
 
@@ -133,7 +135,7 @@ bool Terminal::registerMeal() {
     if(!isOpen()) return false;
     QDateTime local(QDateTime::currentDateTime());
     QString format = "t hh:mm:ss dd-MM-yyyy";
-    Meal *meal = new Meal(local.toString(format),m_currentUser->get_id(),m_selectedFood->get_id());
+    Meal *meal = new Meal(local.toString(format),m_currentUser->get_userid(),m_selectedFood->get_id());
     daobject.insert(meal);
     return true;
 }

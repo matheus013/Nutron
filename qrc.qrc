@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>gui/main.qml</file>
+        <file>gui/TextLine.qml</file>
+        <file>gui/RankPage.qml</file>
     </qresource>
 </RCC>
