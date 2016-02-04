@@ -10,7 +10,7 @@ Item {
             font { pixelSize: hpercent(this,33); bold:true }
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            text:"Ranking"; color:"#242424"
+            text:"Ranking"; color:"#9E9E9E"
         }
         Item{
             height:hpercent(parent,20); width: wpercent(parent,100);
@@ -21,13 +21,13 @@ Item {
                     font { pixelSize: hpercent(this,33); }
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    text:"Name"; color:"#242424"
+                    text:"Name"; color:"#9E9E9E"
                 }Text {
                     height:hpercent(parent,100); width: wpercent(parent,50);
                     font { pixelSize: hpercent(this,33); }
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    text:"Score"; color:"#242424"
+                    text:"Score"; color:"#9E9E9E"
                 }
             }
         }
@@ -44,6 +44,7 @@ Item {
                         font { pixelSize: hpercent(this,30) }
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
+                        color:"#9E9E9E"
                         text:name
                     }
                     Text {
@@ -51,6 +52,7 @@ Item {
                         font { pixelSize: hpercent(this,30) }
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
+                        color:"#9E9E9E"
                         text:score
                     }
                 }

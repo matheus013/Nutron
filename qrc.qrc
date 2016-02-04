@@ -3,5 +3,7 @@
         <file>gui/main.qml</file>
         <file>gui/TextLine.qml</file>
         <file>gui/RankPage.qml</file>
+        <file>gui/BButton.qml</file>
+        <file>gui/PopUpWindow.qml</file>
     </qresource>
 </RCC>

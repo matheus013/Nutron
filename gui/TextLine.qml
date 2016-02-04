@@ -9,6 +9,7 @@ Item {
     property alias textColor : textEdit.color
     property alias placeholder : label.text
     property alias text : textEdit.text
+    property alias inputMask: textEdit.inputMask
     property var edited : false
     property var password : false
     property bool validate: false
