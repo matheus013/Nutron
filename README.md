@@ -14,3 +14,4 @@ Qt 5.5.1
 - Matheus Inácio Batista Santos
 - Computer Engineering Student of Federal University of Alagoas
 - Software Engineering Project
+- Contact matheus.bs@ic.ufal.br
