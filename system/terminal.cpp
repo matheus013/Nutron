@@ -18,6 +18,23 @@ bool Terminal::isOpen() const{
     return sessionOpen;
 }
 
+void Terminal::loadLastMeals() {
+    QSqlQuery query;
+    query.clear();
+    QString tag = "SELECT * FROM historic_meals WHERE author = '" +
+            QString::number(get_currentUser()->get_user_id()) + '\'';
+    query.prepare(tag);
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else{
+        while(query.next()) {
+            Food* food = (Food*) m_foodList.at(query.value("food_id").toInt() - 1);
+            m_lastMeals->append(food);
+        }
+    }
+    qDebug() << m_lastMeals->size();
+}
+
 bool Terminal::lessRank(const QObject *a, const QObject *b){
     return a->property("score") > b->property("score");
 }
@@ -103,8 +120,10 @@ User *Terminal::at(QString username) {
 
 bool Terminal::login(QString username, QString password) {
     Authenticate validate;
+//    qDebug() << "kk";
     if(!validate.loginIsValid(username,password)) return sessionOpen;
     m_currentUser = at(username);
+//    loadLastMeals();
     sessionOpen = true;
     return sessionOpen;
 }

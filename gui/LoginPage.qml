@@ -19,7 +19,6 @@ Item{
         TextLine{
             id: username
             placeholder: "Username"
-            validate: true
             height: hpercent(parent,12)
             width: hpercent(parent,80)
         }
@@ -38,6 +37,11 @@ Item{
                 text: "Login"
                 color: "#009688"
                 radius: height/2
+                action.onClicked: {
+                    if(_console.login(username.text,password.text)){
+                        stackPages.push(userComponent)
+                    }
+                }
             }
             BButton{
                 height: hpercent(root,13)
@@ -54,5 +58,9 @@ Item{
         id: registerComponent
 
         RegisterPage{}
+    }
+    Component{
+        id: userComponent
+        CurrPage{}
     }
 }

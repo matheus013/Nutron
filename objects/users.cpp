@@ -2,7 +2,7 @@
 #include "users.h"
 
 User::User(){
-    setObjectName("nutron_users");
+    setObjectName("nutron_user");
 }
 
 User::User(const QObject *object) {

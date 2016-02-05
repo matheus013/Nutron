@@ -7,5 +7,6 @@
         <file>gui/PopUpWindow.qml</file>
         <file>gui/RegisterPage.qml</file>
         <file>gui/LoginPage.qml</file>
+        <file>gui/CurrPage.qml</file>
     </qresource>
 </RCC>

@@ -10,6 +10,7 @@
 class Terminal : public QObject {
     Q_OBJECT
     QML_OBJMODEL_PROPERTY(User,userList)
+    QML_OBJMODEL_PROPERTY(Food,lastMeals)
     QML_WRITABLE_PROPERTY(QList<QObject*>, foodList)
     QML_WRITABLE_PROPERTY(User*, currentUser)
     QML_WRITABLE_PROPERTY(Food*, selectedFood)
@@ -41,5 +42,6 @@ public:
     Q_INVOKABLE bool registerMeal();
 
     Q_INVOKABLE bool isOpen() const;
+    void loadLastMeals();
 };
 
