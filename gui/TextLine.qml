@@ -14,6 +14,7 @@ Item {
     property var password : false
     property bool validate: false
     property bool email: false
+    property bool isValid: true
     function getText() { return textEdit.text }
     function getTextLength() { return textEdit.text.length }
     function isEmpty() { return textEdit.text.length == 0 ? true:false }
@@ -35,12 +36,16 @@ Item {
             verticalAlignment: TextEdit.AlignVCenter
             onFocusChanged: edited=true
             onTextChanged: {
-                if(validate)
-                    line.color = _authenticate.usernameExists(text)?
+                if(validate){
+                    isValid =_authenticate.usernameValid(text)
+                    line.color = isValid?
                                 (textEdit.focus ? "#3EE50B" : normalColor):"#E50B0B"
-                if(email)
-                    line.color = _authenticate.isEmailAddress(text)?
+                }
+                if(email){
+                    isValid = _authenticate.isEmailAddress(text) && _authenticate.emailValid(text)
+                    line.color = isValid?
                                 (textEdit.focus ? "#3EE50B" : normalColor):"#E50B0B"
+                }
                 if(getTextLength() == 0)
                     line.color = selectColor
             }

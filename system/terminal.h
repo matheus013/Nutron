@@ -9,20 +9,20 @@
 
 class Terminal : public QObject {
     Q_OBJECT
-    QML_OBJMODEL_PROPERTY(Users,userList)
+    QML_OBJMODEL_PROPERTY(User,userList)
     QML_WRITABLE_PROPERTY(QList<QObject*>, foodList)
-    QML_WRITABLE_PROPERTY(Users*, currentUser)
+    QML_WRITABLE_PROPERTY(User*, currentUser)
     QML_WRITABLE_PROPERTY(Food*, selectedFood)
     DAObject daobject;
     bool sessionOpen;
 
     static bool lessRank(const QObject *a,const QObject *b);
-    Users *at(QString username);
+    User *at(QString username);
 public:
     Terminal();
 
-    Q_INVOKABLE void insertUser(QString username, QString password, QString name,
-                                int age, double height, double weight, QString email);
+    Q_INVOKABLE void insertUser(QString username, QString password, QString name, QString email,
+                                int age = 0, double height = 0, double weight = 0);
     Q_INVOKABLE void insertFood(QString name, QString description, int calorificvalue,
                                 QString image, QString classification);
 

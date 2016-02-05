@@ -13,6 +13,7 @@ DAObject::DAObject(){
     connection = new Connection("data","postgres","senha","localhost","QPSQL");
     connection->startConnection();
     if(connection->getDataConnection().isOpen()) qDebug() << "Successfully connected!";
+    else qDebug() << "fail connect";
 }
 
 void DAObject::insert(QObject *object){

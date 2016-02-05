@@ -3,9 +3,9 @@
 #include <QObject>
 #include "QQmlHelpers"
 
-class Users : public QObject{
+class User : public QObject{
     Q_OBJECT
-    QML_WRITABLE_PROPERTY(int, userid)
+    QML_WRITABLE_PROPERTY(int, user_id)
     QML_WRITABLE_PROPERTY(QString, username)
     QML_WRITABLE_PROPERTY(QString, password)
     QML_WRITABLE_PROPERTY(QString, name)
@@ -17,9 +17,9 @@ class Users : public QObject{
     QML_WRITABLE_PROPERTY(double, weight)
 
 public:
-    Users();
-    Users(const QObject* object);
-    Users(QString username, QString password, QString name, QString email,
+    User();
+    User(const QObject* object);
+    User(QString username, QString password, QString name, QString email,
           int age, double height, double weight);
     bool isEmpty();
 

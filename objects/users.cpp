@@ -1,11 +1,11 @@
 #include <QDebug>
 #include "users.h"
 
-Users::Users(){
+User::User(){
     setObjectName("nutron_users");
 }
 
-Users::Users(const QObject *object) {
+User::User(const QObject *object) {
     setObjectName("nutron_user");
     set_level(object->property("level").toInt());
     set_score(object->property("score").toInt());
@@ -18,7 +18,7 @@ Users::Users(const QObject *object) {
     set_name(object->property("name").toString());
 }
 
-Users::Users(QString username, QString password, QString name, QString email,
+User::User(QString username, QString password, QString name, QString email,
              int age, double height, double weight){
     setObjectName("nutron_user");
     set_level(0);
@@ -32,7 +32,7 @@ Users::Users(QString username, QString password, QString name, QString email,
     set_name(name);
 }
 
-bool Users::isEmpty() {
-    return get_userid() == 0;
+bool User::isEmpty() {
+    return get_user_id() == 0;
 }
 

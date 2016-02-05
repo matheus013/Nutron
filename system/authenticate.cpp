@@ -27,7 +27,7 @@ bool Authenticate::loginIsValid(QString username, QString password) {
     return false;
 }
 
-bool Authenticate::usernameExists(QString username) {
+bool Authenticate::usernameValid(QString username) {
     if(username.length() < 6 || username.length() > 20) return false;
     QSqlQuery query;
     query.prepare( "SELECT * FROM nutron_user" );
@@ -36,6 +36,18 @@ bool Authenticate::usernameExists(QString username) {
     else
         while(query.next())
             if(query.value("username").toString() == username)
+                return false;
+    return true;
+}
+
+bool Authenticate::emailValid(QString email) {
+    QSqlQuery query;
+    query.prepare( "SELECT * FROM nutron_user" );
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else
+        while(query.next())
+            if(query.value("email").toString() == email)
                 return false;
     return true;
 }

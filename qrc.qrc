@@ -5,5 +5,7 @@
         <file>gui/RankPage.qml</file>
         <file>gui/BButton.qml</file>
         <file>gui/PopUpWindow.qml</file>
+        <file>gui/RegisterPage.qml</file>
+        <file>gui/LoginPage.qml</file>
     </qresource>
 </RCC>

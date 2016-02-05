@@ -8,7 +8,7 @@
 
 Terminal::Terminal() {
     m_currentUser = 0;
-    m_userList = new QQmlObjectListModel<Users>();
+    m_userList = new QQmlObjectListModel<User>();
     sessionOpen = false;
     loadFood();
     loadUser();
@@ -22,9 +22,9 @@ bool Terminal::lessRank(const QObject *a, const QObject *b){
     return a->property("score") > b->property("score");
 }
 
-void Terminal::insertUser(QString username, QString password, QString name,
-                          int age, double height, double weight, QString email) {
-    Users * user = new Users(username,password,name,email,age,height,weight);
+void Terminal::insertUser(QString username, QString password, QString name, QString email,
+                          int age, double height, double weight) {
+    User * user = new User(username,password,name,email,age,height,weight);
     daobject.insert(user);
     loadUser();
 }
@@ -45,12 +45,12 @@ void Terminal::loadUser() {
     }
     else{
         while(query.next()) {
-            Users * user = new Users();
+            User * user = new User();
             user->set_username(query.value("username").toString());
             user->set_age(query.value("age").toInt());
             user->set_email(query.value("email").toString());
             user->set_height(query.value("height").toDouble());
-            user->set_userid(query.value("id").toInt());
+            user->set_user_id(query.value("user_id").toInt());
             user->set_level(query.value("level").toInt());
             user->set_name(query.value("name").toString());
             user->set_password(query.value("password").toString());
@@ -72,7 +72,7 @@ void Terminal::loadFood() {
     else{
         while(query.next()) {
             Food* food = new Food();
-            food->set_id(query.value("id").toInt());
+            food->set_food_id(query.value("food_id").toInt());
             food->set_name(query.value("name").toString());
             food->set_calorificValue(query.value("calorificvalue").toInt());
             food->set_classification(query.value("classification").toString());
@@ -86,19 +86,19 @@ void Terminal::loadFood() {
 
 void Terminal::saveUser() {
     for (int i = 0; i < m_userList->size(); i++)
-        daobject.update(m_userList->get(i));
+        daobject.update(m_userList->get(i),"userid");
 }
 
 void Terminal::saveFood() {
     for (QList<QObject*>::iterator i = m_foodList.begin(); i != m_foodList.end(); ++i)
-        daobject.update(*i);
+        daobject.update(*i,"foodid");
 }
 
-Users *Terminal::at(QString username) {
+User *Terminal::at(QString username) {
     for (int i = 0; i < m_userList->size(); i++)
         if((m_userList->get(i))->property("username").toString() == username)
-            return (Users*)(m_userList->get(i));
-    return new Users();
+            return (User*)(m_userList->get(i));
+    return new User();
 }
 
 bool Terminal::login(QString username, QString password) {
@@ -110,13 +110,13 @@ bool Terminal::login(QString username, QString password) {
 }
 
 void Terminal::logout() {
-    m_currentUser = new Users();
+    m_currentUser = new User();
     sessionOpen = false;
 }
 
 bool Terminal::selectFood(int id) {
     for (QList<QObject*>::iterator i = m_foodList.begin(); i != m_foodList.end(); ++i)
-        if((*i)->property("id").toInt() == id){
+        if((*i)->property("userid").toInt() == id){
             m_selectedFood = (Food*)(*i);
             return true;
         }
@@ -135,7 +135,8 @@ bool Terminal::registerMeal() {
     if(!isOpen()) return false;
     QDateTime local(QDateTime::currentDateTime());
     QString format = "t hh:mm:ss dd-MM-yyyy";
-    Meal *meal = new Meal(local.toString(format),m_currentUser->get_userid(),m_selectedFood->get_id());
+    Meal *meal = new Meal(local.toString(format), m_currentUser->get_user_id(),
+                          m_selectedFood->get_food_id());
     daobject.insert(meal);
     return true;
 }

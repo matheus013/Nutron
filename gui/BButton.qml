@@ -21,7 +21,7 @@ Item {
         verticalOffset: elevation
         radius: 3*elevation
         samples: 32
-        color: "#80000000"
+        color: "#8E9E9E9E"
         source: button
         transparentBorder: true
         scale: mouseArea.containsMouse ? zoom : 1
