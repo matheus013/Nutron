@@ -62,18 +62,16 @@ Item{
                     if(username.text == "" || password.text == "" || name.text == "" || email.text == "")
                         invalidRegisterPopUp("Empty fields.")
                     else {
-                        if(username.isValid && email.isValid && username.text + password.text +
-                                name.text + email.text != ""){
+                        if(username.isValid && email.isValid){
                             _console.insertUser(username.text, password.text, name.text, email.text)
                             stackPages.pop()
                         }
-                        if(!_authenticate.usernameValid(username.text) &&
-                                (!_authenticate.emailValid(email.text) ||
+                        if(!username.isValid && (!email.isValid ||
                                  !_authenticate.isEmailAddress(email.text)))
                             invalidRegisterPopUp("Invalid user and email.")
-                        else if(!_authenticate.usernameValid(username.text))
+                        else if(!username.isValid)
                             invalidRegisterPopUp("Invalid user.")
-                        else if(!_authenticate.emailValid(email.text))
+                        else if(!email.isValid)
                             invalidRegisterPopUp("Invalid email.")
                     }
                 }
