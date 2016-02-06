@@ -15,5 +15,4 @@ ApplicationWindow {
         anchors.fill: parent
         initialItem: LoginPage{}
     }
-
 }

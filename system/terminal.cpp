@@ -9,6 +9,8 @@
 Terminal::Terminal() {
     m_currentUser = 0;
     m_userList = new QQmlObjectListModel<User>();
+    m_lastMeals = new QQmlObjectListModel<Food>();
+    m_foodList = new QQmlObjectListModel<Food>();
     sessionOpen = false;
     loadFood();
     loadUser();
@@ -28,11 +30,11 @@ void Terminal::loadLastMeals() {
         qDebug() << query.lastError();
     else{
         while(query.next()) {
-            Food* food = (Food*) m_foodList.at(query.value("food_id").toInt() - 1);
+            Food* food = (Food*) m_foodList->at(query.value("food_id").toInt() - 1);
             m_lastMeals->append(food);
         }
     }
-    qDebug() << m_lastMeals->size();
+    qDebug() << "current user meals" << m_lastMeals->size();
 }
 
 bool Terminal::lessRank(const QObject *a, const QObject *b){
@@ -95,7 +97,7 @@ void Terminal::loadFood() {
             food->set_classification(query.value("classification").toString());
             food->set_description(query.value("description").toString());
             food->set_image(query.value("image").toString());
-            m_foodList.append(food);
+            m_foodList->append(food);
 
         }
     }
@@ -107,7 +109,7 @@ void Terminal::saveUser() {
 }
 
 void Terminal::saveFood() {
-    for (QList<QObject*>::iterator i = m_foodList.begin(); i != m_foodList.end(); ++i)
+    for (QQmlObjectListModel<Food>::iterator i = m_foodList->begin(); i != m_foodList->end(); ++i)
         daobject.update(*i,"foodid");
 }
 
@@ -120,10 +122,9 @@ User *Terminal::at(QString username) {
 
 bool Terminal::login(QString username, QString password) {
     Authenticate validate;
-//    qDebug() << "kk";
     if(!validate.loginIsValid(username,password)) return sessionOpen;
     m_currentUser = at(username);
-//    loadLastMeals();
+    loadLastMeals();
     sessionOpen = true;
     return sessionOpen;
 }
@@ -134,8 +135,8 @@ void Terminal::logout() {
 }
 
 bool Terminal::selectFood(int id) {
-    for (QList<QObject*>::iterator i = m_foodList.begin(); i != m_foodList.end(); ++i)
-        if((*i)->property("userid").toInt() == id){
+    for (QQmlObjectListModel<Food>::iterator i = m_foodList->begin(); i != m_foodList->end(); ++i)
+        if((*i)->property("food_id").toInt() == id){
             m_selectedFood = (Food*)(*i);
             return true;
         }
@@ -157,5 +158,6 @@ bool Terminal::registerMeal() {
     Meal *meal = new Meal(local.toString(format), m_currentUser->get_user_id(),
                           m_selectedFood->get_food_id());
     daobject.insert(meal);
+    loadLastMeals();
     return true;
 }
