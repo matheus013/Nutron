@@ -10,6 +10,7 @@ Item {
     property alias rectHeight : centerRect.height
     property alias rectWidth : centerRect.width
     property alias rectScale : centerRect.scale
+    property alias text: message.text
     function open() { state = "showed" }
     function closed() { state = "hidden" }
     height: parent.height; width: parent.width
@@ -22,7 +23,7 @@ Item {
         verticalOffset: 0
         radius: 0
         samples: 32
-        color: "#FF000000"
+        color: "#8E9E9E9E"
         source: centerRect
         transparentBorder: true
     }
@@ -30,7 +31,16 @@ Item {
     Rectangle {
         id:centerRect
         height:parent.height - parent.width/10; width:parent.width - parent.width/10;
+        radius: 10
         anchors { verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter }
+        Text{
+            id: message
+            height:hpercent(parent,100); width: wpercent(parent,100);
+            font { pixelSize: hpercent(this,40) }
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            color:"#9E9E9E"
+        }
     }
 
     states: [

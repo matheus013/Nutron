@@ -57,6 +57,15 @@ Item {
                     }
                 }
             }
+            Row{
+                BButton{
+                    height: hpercent(root,13)
+                    width: wpercent(root,20)
+                    text: "Cancel"
+                    color: "#673AB7"
+//                    action.onClicked: stackPages.pop()
+                }
+            }
         }
     }
 }

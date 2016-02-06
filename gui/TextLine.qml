@@ -4,8 +4,8 @@ import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
 
 Item {
-    property var selectColor : "#009688"
-    property var normalColor : "#2196F3"
+    property var selectColor : "#673AB7"
+    property var normalColor : "#9575CD"
     property alias textColor : textEdit.color
     property alias placeholder : label.text
     property alias text : textEdit.text
@@ -39,12 +39,12 @@ Item {
                 if(validate){
                     isValid =_authenticate.usernameValid(text)
                     line.color = isValid?
-                                (textEdit.focus ? "#3EE50B" : normalColor):"#E50B0B"
+                                (textEdit.focus ? selectColor : normalColor):"#E50B0B"
                 }
                 if(email){
                     isValid = _authenticate.isEmailAddress(text) && _authenticate.emailValid(text)
                     line.color = isValid?
-                                (textEdit.focus ? "#3EE50B" : normalColor):"#E50B0B"
+                                (textEdit.focus ? selectColor : normalColor):"#E50B0B"
                 }
                 if(getTextLength() == 0)
                     line.color = selectColor

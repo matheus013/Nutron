@@ -21,6 +21,8 @@ Item{
             placeholder: "Username"
             height: hpercent(parent,12)
             width: hpercent(parent,80)
+            KeyNavigation.tab: password
+            KeyNavigation.backtab: password
         }
         TextLine{
             id: password
@@ -28,6 +30,8 @@ Item{
             password: true
             height: hpercent(parent,12)
             width: hpercent(parent,80)
+            KeyNavigation.tab: username
+            KeyNavigation.backtab: username
         }
         Row{
             spacing: wpercent(parent,30)
@@ -35,19 +39,20 @@ Item{
                 height: hpercent(root,13)
                 width: height
                 text: "Login"
-                color: "#009688"
+                color: "#673AB7"
                 radius: height/2
                 action.onClicked: {
                     if(_console.login(username.text,password.text)){
                         stackPages.push(userComponent)
-                    }
+                    }else
+                        invalidLoginPopUp()
                 }
             }
             BButton{
                 height: hpercent(root,13)
                 width: height
                 text: "Register"
-                color: "#009688"
+                color: "#673AB7"
                 radius: height/2
                 action.onClicked: stackPages.push(registerComponent)
             }

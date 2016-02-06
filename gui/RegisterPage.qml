@@ -2,6 +2,13 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 
 Item{
+    function invalidRegisterPopUp(message){
+        popUpRegister.text = message
+        popUpRegister.open()
+        timePopUpRegister.start()
+
+    }
+
     Text{
         height:hpercent(parent,20); width: wpercent(parent,100);
         font { pixelSize: hpercent(this,33); bold:true }
@@ -49,35 +56,46 @@ Item{
                 height: hpercent(root,13)
                 width: height
                 text: "Confirm"
-                color: "#009688"
+                color: "#673AB7"
                 radius: height/2
                 action.onClicked: {
-                    if(username.isValid && email.isValid && username.text + password.text +
-                            name.text + email.text != "")
-                        _console.insertUser(username.text, password.text, name.text, email.text)
+                    if(username.text == "" || password.text == "" || name.text == "" || email.text == "")
+                        invalidRegisterPopUp("Empty fields.")
                     else {
-                        if(username.text + password.text + name.text + email.text == "")
-                            console.log("campos vazios")
-                        else {
-                            if(!_authenticate.usernameValid(username.text))
-                                console.log("usuario indisponivel")
-                            if(!_authenticate.emailValid(email.text))
-                                console.log("email indisponivel")
+                        if(username.isValid && email.isValid && username.text + password.text +
+                                name.text + email.text != ""){
+                            _console.insertUser(username.text, password.text, name.text, email.text)
+                            stackPages.pop()
                         }
+                        if(!_authenticate.usernameValid(username.text) &&
+                                (!_authenticate.emailValid(email.text) ||
+                                 !_authenticate.isEmailAddress(email.text)))
+                            invalidRegisterPopUp("Invalid user and email.")
+                        else if(!_authenticate.usernameValid(username.text))
+                            invalidRegisterPopUp("Invalid user.")
+                        else if(!_authenticate.emailValid(email.text))
+                            invalidRegisterPopUp("Invalid email.")
                     }
-                    stackPages.pop()
-
                 }
-
             }
             BButton{
                 height: hpercent(root,13)
                 width: height
                 text: "Cancel"
-                color: "#009688"
+                color: "#673AB7"
                 radius: height/2
                 action.onClicked: stackPages.pop()
             }
         }
+    }
+    PopUpWindow{
+        id:popUpRegister
+        rectHeight: hpercent(root,8)
+        color: "#333"
+    }
+    Timer{
+        id: timePopUpRegister
+        interval: 2500
+        onTriggered: popUpRegister.closed()
     }
 }
