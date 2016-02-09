@@ -93,7 +93,7 @@ void Terminal::loadFood() {
             Food* food = new Food();
             food->set_food_id(query.value("food_id").toInt());
             food->set_name(query.value("name").toString());
-            food->set_calorificValue(query.value("calorificvalue").toInt());
+            food->set_calorificvalue(query.value("calorificvalue").toInt());
             food->set_classification(query.value("classification").toString());
             food->set_description(query.value("description").toString());
             food->set_image(query.value("image").toString());
@@ -101,6 +101,7 @@ void Terminal::loadFood() {
 
         }
     }
+    qDebug() << m_foodList->size();
 }
 
 void Terminal::saveUser() {
@@ -135,12 +136,8 @@ void Terminal::logout() {
 }
 
 bool Terminal::selectFood(int id) {
-    for (QQmlObjectListModel<Food>::iterator i = m_foodList->begin(); i != m_foodList->end(); ++i)
-        if((*i)->property("food_id").toInt() == id){
-            m_selectedFood = (Food*)(*i);
-            return true;
-        }
-    return false;
+    m_selectedFood = m_foodList->at(id - 1);
+    return m_selectedFood->get_food_id() == id;
 }
 
 void Terminal::printCurrent() {
