@@ -8,5 +8,6 @@
         <file>gui/RegisterPage.qml</file>
         <file>gui/LoginPage.qml</file>
         <file>gui/CurrPage.qml</file>
+        <file>gui/FoodsPage.qml</file>
     </qresource>
 </RCC>

@@ -32,7 +32,7 @@ Item {
                 text: "Age: " + _console.currentUser.age
             }
             ListView {
-                height:hpercent(parent,60); width: wpercent(parent,100);
+                height:hpercent(parent,40); width: wpercent(parent,100);
                 model: _console.lastMeals
                 delegate: Item {
                     height:hpercent(rootRank,10); width: wpercent(parent,100);
@@ -58,12 +58,23 @@ Item {
                 }
             }
             Row{
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: wpercent(root,8)
                 BButton{
-                    height: hpercent(root,13)
+                    height: hpercent(root,10)
                     width: wpercent(root,20)
-                    text: "Cancel"
+                    radius: 10
+                    text: "Add meal"
                     color: "#673AB7"
 //                    action.onClicked: stackPages.pop()
+                }
+                BButton{
+                    height: hpercent(root,10)
+                    width: wpercent(root,20)
+                    radius: 10
+                    text: "Back"
+                    color: "#673AB7"
+                    action.onClicked: stackPages.pop()
                 }
             }
         }

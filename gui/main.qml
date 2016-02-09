@@ -18,8 +18,10 @@ ApplicationWindow {
     StackView {
         id: stackPages
         anchors.fill: parent
-        initialItem: LoginPage{}
+//        initialItem: LoginPage{}
+        initialItem: FoodsPage{}
     }
+
     PopUpWindow{
         id:popUpLogin
         rectHeight: hpercent(root,8)

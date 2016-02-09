@@ -20,7 +20,7 @@ Item{
             id: username
             placeholder: "Username"
             height: hpercent(parent,12)
-            width: hpercent(parent,80)
+            width: wpercent(parent,100)
             KeyNavigation.tab: password
             KeyNavigation.backtab: password
         }
@@ -29,7 +29,7 @@ Item{
             placeholder: "Password"
             password: true
             height: hpercent(parent,12)
-            width: hpercent(parent,80)
+            width: wpercent(parent,100)
             KeyNavigation.tab: username
             KeyNavigation.backtab: username
         }
