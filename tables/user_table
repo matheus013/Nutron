@@ -1,0 +1,25 @@
+-- Table: nutron_user
+
+-- DROP TABLE nutron_user;
+
+CREATE TABLE nutron_user
+(
+  user_id serial NOT NULL,
+  username text,
+  password text,
+  level integer,
+  name text,
+  age integer,
+  score integer,
+  height double precision,
+  weight double precision,
+  email text NOT NULL,
+  CONSTRAINT x_user_pkey PRIMARY KEY (user_id),
+  CONSTRAINT x_email_unique UNIQUE (email),
+  CONSTRAINT x_username_unique UNIQUE (username)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE nutron_user
+  OWNER TO admin;

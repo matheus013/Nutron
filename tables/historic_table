@@ -1,0 +1,17 @@
+-- Table: historic_meals
+
+-- DROP TABLE historic_meals;
+
+CREATE TABLE historic_meals
+(
+  historic_id serial NOT NULL,
+  author integer,
+  food integer,
+  instant text,
+  CONSTRAINT m_id_pk PRIMARY KEY (historic_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE historic_meals
+  OWNER TO admin;
