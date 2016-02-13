@@ -36,4 +36,5 @@ HEADERS += \
     assets/cpp/qqmlobjectlistmodel.h
 
 RESOURCES += \
-    qrc.qrc
+    qrc.qrc \
+    img.qrc

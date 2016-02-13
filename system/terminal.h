@@ -14,9 +14,8 @@ class Terminal : public QObject {
     QML_OBJMODEL_PROPERTY(Food, foodList)
     QML_WRITABLE_PROPERTY(User*, currentUser)
     QML_WRITABLE_PROPERTY(Food*, selectedFood)
+    QML_WRITABLE_PROPERTY(bool,sessionOpen)
     DAObject daobject;
-    bool sessionOpen;
-
     static bool lessRank(const QObject *a,const QObject *b);
     User *at(QString username);
 public:

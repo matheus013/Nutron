@@ -7,7 +7,9 @@
         <file>gui/PopUpWindow.qml</file>
         <file>gui/RegisterPage.qml</file>
         <file>gui/LoginPage.qml</file>
-        <file>gui/CurrPage.qml</file>
         <file>gui/FoodsPage.qml</file>
+        <file>gui/SideBar.qml</file>
+        <file>gui/DownBar.qml</file>
+        <file>gui/ImageButton.qml</file>
     </qresource>
 </RCC>

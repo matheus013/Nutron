@@ -11,13 +11,13 @@ Terminal::Terminal() {
     m_userList = new QQmlObjectListModel<User>();
     m_lastMeals = new QQmlObjectListModel<Food>();
     m_foodList = new QQmlObjectListModel<Food>();
-    sessionOpen = false;
+    m_sessionOpen = false;
     loadFood();
     loadUser();
 }
 
 bool Terminal::isOpen() const{
-    return sessionOpen;
+    return m_sessionOpen;
 }
 
 void Terminal::loadLastMeals() {
@@ -30,7 +30,7 @@ void Terminal::loadLastMeals() {
         qDebug() << query.lastError();
     else{
         while(query.next()) {
-            Food* food = (Food*) m_foodList->at(query.value("food_id").toInt() - 1);
+            Food* food = (Food*) m_foodList->at(query.value("food").toInt() - 1);
             m_lastMeals->append(food);
         }
     }
@@ -102,6 +102,7 @@ void Terminal::loadFood() {
         }
     }
     qDebug() << m_foodList->size();
+
 }
 
 void Terminal::saveUser() {
@@ -123,16 +124,16 @@ User *Terminal::at(QString username) {
 
 bool Terminal::login(QString username, QString password) {
     Authenticate validate;
-    if(!validate.loginIsValid(username,password)) return sessionOpen;
+    if(!validate.loginIsValid(username,password)) return m_sessionOpen;
     m_currentUser = at(username);
     loadLastMeals();
-    sessionOpen = true;
-    return sessionOpen;
+    set_sessionOpen(true);
+    return m_sessionOpen;
 }
 
 void Terminal::logout() {
     m_currentUser = new User();
-    sessionOpen = false;
+    set_sessionOpen(false);
 }
 
 bool Terminal::selectFood(int id) {

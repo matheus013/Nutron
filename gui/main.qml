@@ -14,21 +14,38 @@ ApplicationWindow {
     visible: true
     title: "Nutron"
     color: "#333"
-
-    StackView {
-        id: stackPages
+    Column{
         anchors.fill: parent
-//        initialItem: LoginPage{}
-        initialItem: FoodsPage{}
+        StackView {
+            id: stackPages
+            height: hpercent(root,85)
+            width: wpercent(root,100)
+            initialItem: loginComponent
+            onCurrentItemChanged: {
+                if(_console.sessionOpen){
+                    //                stackPages.push(userComponent)
+                }
+            }
+        }
+        DownBar{
+            height: hpercent(root,15)
+            width: wpercent(root,100)
+        }
     }
-
+    Component{
+        id: loginComponent
+        LoginPage{}
+    }
+    Component{
+        id: registerComponent
+        RegisterPage{}
+    }
     PopUpWindow{
         id:popUpLogin
         rectHeight: hpercent(root,8)
         color: "#333"
         text: "Password or user invalid."
     }
-
     Timer {
         id: timePopUpLogin
         interval: 2500
