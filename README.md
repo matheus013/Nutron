@@ -6,6 +6,10 @@ from https://github.com/iksaif/qpriorityqueue
 
 from https://github.com/BrunoGeorgevich/BrunoComponents
 
+# Flaticons
+
+from http://www.flaticon.com/
+
 # Qt
 
 Qt 5.5.1

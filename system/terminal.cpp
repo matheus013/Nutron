@@ -5,19 +5,16 @@
 #include "terminal.h"
 #include "authenticate.h"
 #include "../objects/meal.h"
+#include "QQmlHelpers"
 
 Terminal::Terminal() {
     m_currentUser = 0;
     m_userList = new QQmlObjectListModel<User>();
     m_lastMeals = new QQmlObjectListModel<Food>();
     m_foodList = new QQmlObjectListModel<Food>();
-    m_sessionOpen = false;
+    set_sessionOpen(false);
     loadFood();
     loadUser();
-}
-
-bool Terminal::isOpen() const{
-    return m_sessionOpen;
 }
 
 void Terminal::loadLastMeals() {
@@ -34,7 +31,6 @@ void Terminal::loadLastMeals() {
             m_lastMeals->append(food);
         }
     }
-    qDebug() << "current user meals" << m_lastMeals->size();
 }
 
 bool Terminal::lessRank(const QObject *a, const QObject *b){
@@ -101,8 +97,6 @@ void Terminal::loadFood() {
 
         }
     }
-    qDebug() << m_foodList->size();
-
 }
 
 void Terminal::saveUser() {
@@ -125,7 +119,7 @@ User *Terminal::at(QString username) {
 bool Terminal::login(QString username, QString password) {
     Authenticate validate;
     if(!validate.loginIsValid(username,password)) return m_sessionOpen;
-    m_currentUser = at(username);
+    set_currentUser(at(username));
     loadLastMeals();
     set_sessionOpen(true);
     return m_sessionOpen;
@@ -137,12 +131,12 @@ void Terminal::logout() {
 }
 
 bool Terminal::selectFood(int id) {
-    m_selectedFood = m_foodList->at(id - 1);
+    set_selectedFood(m_foodList->at(id - 1));
     return m_selectedFood->get_food_id() == id;
 }
 
 void Terminal::printCurrent() {
-    if(isOpen()){
+    if(get_sessionOpen()){
         qDebug() << m_currentUser->get_name()
                  << m_currentUser->get_username()
                  << m_currentUser->get_score();
@@ -150,7 +144,7 @@ void Terminal::printCurrent() {
 }
 
 bool Terminal::registerMeal() {
-    if(!isOpen()) return false;
+    if(!get_sessionOpen()) return false;
     QDateTime local(QDateTime::currentDateTime());
     QString format = "t hh:mm:ss dd-MM-yyyy";
     Meal *meal = new Meal(local.toString(format), m_currentUser->get_user_id(),

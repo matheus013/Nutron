@@ -57,7 +57,7 @@ Item{
                 height:hpercent(parent,40); width: wpercent(parent,100);
                 model: _console.lastMeals
                 delegate: Item {
-                    height:hpercent(userView,10); width: wpercent(r,100);
+                    height:hpercent(userView,10); width: wpercent(userView,100);
                     Row {
                         anchors.fill: parent
                         Text {

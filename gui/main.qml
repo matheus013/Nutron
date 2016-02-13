@@ -8,7 +8,6 @@ ApplicationWindow {
         timePopUpLogin.start()
         popUpLogin.open()
     }
-
     id: root
     minimumHeight: 600 ; minimumWidth: 450
     visible: true
@@ -21,11 +20,6 @@ ApplicationWindow {
             height: hpercent(root,85)
             width: wpercent(root,100)
             initialItem: loginComponent
-            onCurrentItemChanged: {
-                if(_console.sessionOpen){
-                    //                stackPages.push(userComponent)
-                }
-            }
         }
         DownBar{
             height: hpercent(root,15)

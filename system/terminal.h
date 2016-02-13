@@ -40,7 +40,6 @@ public:
 
     Q_INVOKABLE bool registerMeal();
 
-    Q_INVOKABLE bool isOpen() const;
     void loadLastMeals();
 };
 

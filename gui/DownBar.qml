@@ -12,31 +12,31 @@ Item {
                 height: hpercent(root,15)
                 width: wpercent(root,20)
                 color: allcolor
-                image.source: "qrc:/img/icons/home153.png"
+                image.source: "qrc:/img/icons/home166.png"
             }
             ImageButton{
                 height: hpercent(root,15)
                 width: wpercent(root,20)
                 color: allcolor
-                image.source: "qrc:/img/icons/home153.png"
+                image.source: "qrc:/img/icons/food7.png"
             }
             ImageButton{
                 height: hpercent(root,15)
                 width: wpercent(root,20)
                 color: allcolor
-                image.source: "qrc:/img/icons/profile27.png"
+                image.source: "qrc:/img/icons/profile29.png"
             }
             ImageButton{
                 height: hpercent(root,15)
                 width: wpercent(root,20)
                 color: allcolor
-                image.source: "qrc:/img/icons/home153.png"
+                image.source: "qrc:/img/icons/exercise83.png"
             }
             ImageButton{
                 height: hpercent(root,15)
                 width: wpercent(root,20)
                 color: allcolor
-                image.source: "qrc:/img/icons/home153.png"
+                image.source: "qrc:/img/icons/setting5.png"
             }
         }
     }
