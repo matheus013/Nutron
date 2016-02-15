@@ -2,40 +2,52 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 
 Item {
-    property color allcolor: "#333"
     property int elevation : 10
-    Rectangle {
-        anchors.fill:parent
-        color: allcolor
+    Item {
+        id:backRect
+        height: hpercent(parent,90)
+        width: wpercent(parent,98)
+        anchors.centerIn: parent
         Row{
+            spacing: wpercent(backRect,6.25)
             ImageButton{
-                height: hpercent(root,15)
-                width: wpercent(root,20)
-                color: allcolor
+                height: hpercent(backRect,90)
+                width: wpercent(backRect,15)
+                radius: 10
+                color: "#FFF"
                 image.source: "qrc:/img/icons/home166.png"
+                action.onClicked: stackPages.push(rankPageComponent)
             }
             ImageButton{
-                height: hpercent(root,15)
-                width: wpercent(root,20)
-                color: allcolor
+                height: hpercent(backRect,90)
+                width: wpercent(backRect,15)
+                radius: 10
+                color: "#FFF"
                 image.source: "qrc:/img/icons/food7.png"
+                action.onClicked: stackPages.push(foodComponent)
             }
             ImageButton{
-                height: hpercent(root,15)
-                width: wpercent(root,20)
-                color: allcolor
+                height: hpercent(backRect,90)
+                width: wpercent(backRect,15)
+                radius: 10
+                color: "#FFF"
                 image.source: "qrc:/img/icons/profile29.png"
+                action.onClicked: {
+                    stackPages.push(loginComponent)
+                }
             }
             ImageButton{
-                height: hpercent(root,15)
-                width: wpercent(root,20)
-                color: allcolor
+                height: hpercent(backRect,90)
+                width: wpercent(backRect,15)
+                radius: 10
+                color: "#FFF"
                 image.source: "qrc:/img/icons/exercise83.png"
             }
             ImageButton{
-                height: hpercent(root,15)
-                width: wpercent(root,20)
-                color: allcolor
+                height: hpercent(backRect,90)
+                width: wpercent(backRect,15)
+                radius: 10
+                color: "#FFF"
                 image.source: "qrc:/img/icons/setting5.png"
             }
         }

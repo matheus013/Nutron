@@ -10,8 +10,8 @@
 #include "../objects/users.h"
 
 DAObject::DAObject(){
-    connection = new Connection("data","postgres","senha","localhost","QPSQL");
-    connection->startConnection();
+    connection = new Connection("data","admin","senha","172.20.9.185","QPSQL");
+    if(!connection->startConnection()) qDebug() << "It was not possible to connect to the server";
     if(connection->getDataConnection().isOpen()) qDebug() << "Successfully connected!";
     else qDebug() << "fail connect";
 }

@@ -51,13 +51,12 @@ Item{
             width: hpercent(parent,80)
         }
         Row{
-            spacing: wpercent(parent,30)
+            spacing: wpercent(parent,10)
             BButton{
                 height: hpercent(root,13)
-                width: height
+                width: wpercent(root,25)
+                color: "white"
                 text: "Confirm"
-                color: "#673AB7"
-                radius: height/2
                 action.onClicked: {
                     if(username.text == "" || password.text == "" || name.text == "" || email.text == "")
                         invalidRegisterPopUp("Empty fields.")
@@ -65,6 +64,7 @@ Item{
                         if(username.isValid && email.isValid){
                             _console.insertUser(username.text, password.text, name.text, email.text)
                             stackPages.pop()
+                            invalidRegisterPopUp("User registered successfully.")
                         }
                         if(!username.isValid && (!email.isValid ||
                                  !_authenticate.isEmailAddress(email.text)))
@@ -78,10 +78,9 @@ Item{
             }
             BButton{
                 height: hpercent(root,13)
-                width: height
+                width: wpercent(root,25)
+                color: "white"
                 text: "Cancel"
-                color: "#673AB7"
-                radius: height/2
                 action.onClicked: stackPages.pop()
             }
         }

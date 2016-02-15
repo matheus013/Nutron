@@ -35,7 +35,7 @@ Item{
 
             ListView {
                 height:hpercent(parent,60); width: wpercent(parent,100);
-                model: _console.userList
+                model: _console.topTenUsers
                 delegate: Item {
                     height:hpercent(rootRank,10); width: wpercent(parent,100);
                     Row {

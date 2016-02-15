@@ -11,5 +11,8 @@
         <file>gui/SideBar.qml</file>
         <file>gui/DownBar.qml</file>
         <file>gui/ImageButton.qml</file>
+        <file>gui/UserView.qml</file>
+        <file>gui/LoginView.qml</file>
+        <file>gui/HomePage.qml</file>
     </qresource>
 </RCC>

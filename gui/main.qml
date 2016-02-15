@@ -9,7 +9,8 @@ ApplicationWindow {
         popUpLogin.open()
     }
     id: root
-    minimumHeight: 600 ; minimumWidth: 450
+    height: 600
+    width: 400
     visible: true
     title: "Nutron"
     color: "#333"
@@ -34,6 +35,15 @@ ApplicationWindow {
         id: registerComponent
         RegisterPage{}
     }
+    Component{
+        id: foodComponent
+        FoodsPage{}
+    }
+    Component{
+        id: rankPageComponent
+        RankPage{}
+    }
+
     PopUpWindow{
         id:popUpLogin
         rectHeight: hpercent(root,8)

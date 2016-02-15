@@ -12,6 +12,7 @@ int main(int argc, char *argv[]){
     app.setApplicationVersion("1.0");
     QQmlApplicationEngine engine;
     QQmlContext *ctx = engine.rootContext();
+
     Terminal console;
     Authenticate validate;
     ctx->setContextProperty("_console",&console);

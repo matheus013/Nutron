@@ -3,7 +3,7 @@ QT -= gui
 
 CONFIG += c++11
 
-TARGET = AutoBuildSQL
+TARGET = Nutron
 CONFIG += console
 CONFIG -= app_bundle
 

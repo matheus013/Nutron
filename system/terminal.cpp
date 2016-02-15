@@ -10,6 +10,7 @@
 Terminal::Terminal() {
     m_currentUser = 0;
     m_userList = new QQmlObjectListModel<User>();
+    m_topTenUsers = new QQmlObjectListModel<User>();
     m_lastMeals = new QQmlObjectListModel<Food>();
     m_foodList = new QQmlObjectListModel<Food>();
     set_sessionOpen(false);
@@ -75,6 +76,7 @@ void Terminal::loadUser() {
         }
     }
     qSort(m_userList->begin(),m_userList->end(),Terminal::lessRank);
+    topTen();
 }
 
 void Terminal::loadFood() {
@@ -107,6 +109,11 @@ void Terminal::saveUser() {
 void Terminal::saveFood() {
     for (QQmlObjectListModel<Food>::iterator i = m_foodList->begin(); i != m_foodList->end(); ++i)
         daobject.update(*i,"foodid");
+}
+
+void Terminal::topTen() {
+    int maxFor = (m_userList->size() < 10) ? m_userList->size() : 10;
+    for(int i=0;i<maxFor;i++) m_topTenUsers->append(m_userList->at(i));
 }
 
 User *Terminal::at(QString username) {
