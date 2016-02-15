@@ -4,6 +4,7 @@ import QtQuick.Controls 1.4
 
 Item {
     id:configPageRoot
+    property var online: _console.sessionOpen ? "Logout" : "Login"
     ListView {
         anchors { fill: parent; margins: hpercent(root,5) }
         spacing:hpercent(root,0.5)
@@ -20,24 +21,48 @@ Item {
         delegate: Rectangle {
             height: hpercent(configPageRoot,8); width: wpercent(parent,100)
             Text {
-                anchors.fill: parent
+                id: textModel
+                height: hpercent(parent,100)
+                width: wpercent(parent,80)
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 font.pixelSize: hpercent(parent,30)
-                text:title
+                text:title + ((title == "Log") ? (_console.sessionOpen  ? "out" : "in") : "")
+            }
+            Switch{
+                enabled: isSwitch
+                visible: isSwitch
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: textModel.right
             }
             MouseArea{
+                enabled: !isSwitch
                 anchors.fill: parent
-                onClicked: console.log(title)
+                onClicked: {
+                    switch (textModel.text) {
+                    case "Edit Profile":
+                        console.log(title)
+                        break;
+                    case "About Us":
+                        console.log(1)
+                        break;
+                    case "Logout":
+                        _console.logout()
+                        break;
+                    case "Login":
+                        stackPages.push(loginComponent)
+                        break;
+                    }
+                }
             }
         }
         model: ListModel {
             id:settingsModel
             ListElement { title:"Edit Profile"; type:"Account" }
-            ListElement { title:"Vibration"; type:"Account" }
-            ListElement { title:"Notifications"; type:"Account" }
+            ListElement { title:"Vibration"; type:"Account"; isSwitch: true}
+            ListElement { title:"Notifications"; type:"Account"; isSwitch: true}
             ListElement { title:"About Us"; type:"settings" }
-            ListElement { title:"Logout"; type:"settings" }
+            ListElement { title: "Log"; type:"settings" }
         }
     }
 }
