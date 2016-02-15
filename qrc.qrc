@@ -14,5 +14,6 @@
         <file>gui/UserView.qml</file>
         <file>gui/LoginView.qml</file>
         <file>gui/HomePage.qml</file>
+        <file>gui/ConfigPage.qml</file>
     </qresource>
 </RCC>

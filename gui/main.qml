@@ -43,6 +43,10 @@ ApplicationWindow {
         id: rankPageComponent
         RankPage{}
     }
+    Component{
+        id: configComponent
+        ConfigPage{}
+    }
 
     PopUpWindow{
         id:popUpLogin
