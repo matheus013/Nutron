@@ -15,5 +15,6 @@
         <file>gui/LoginView.qml</file>
         <file>gui/HomePage.qml</file>
         <file>gui/ConfigPage.qml</file>
+        <file>gui/NewFoodPage.qml</file>
     </qresource>
 </RCC>

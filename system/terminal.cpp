@@ -16,11 +16,12 @@ Terminal::Terminal() {
     set_sessionOpen(false);
     loadFood();
     loadUser();
+    topTen();
 }
 
 void Terminal::loadLastMeals() {
     QSqlQuery query;
-    query.clear();
+    m_lastMeals->clear();
     QString tag = "SELECT * FROM historic_meals WHERE author = '" +
             QString::number(get_currentUser()->get_user_id()) + '\'';
     query.prepare(tag);
@@ -32,6 +33,7 @@ void Terminal::loadLastMeals() {
             m_lastMeals->append(food);
         }
     }
+    qDebug() << m_lastMeals->size();
 }
 
 bool Terminal::lessRank(const QObject *a, const QObject *b){
@@ -96,7 +98,6 @@ void Terminal::loadFood() {
             food->set_description(query.value("description").toString());
             food->set_image(query.value("image").toString());
             m_foodList->append(food);
-
         }
     }
 }
@@ -112,8 +113,10 @@ void Terminal::saveFood() {
 }
 
 void Terminal::topTen() {
+    m_topTenUsers->clear();
     int maxFor = (m_userList->size() < 10) ? m_userList->size() : 10;
     for(int i=0;i<maxFor;i++) m_topTenUsers->append(m_userList->at(i));
+    qDebug() << m_topTenUsers->size();
 }
 
 User *Terminal::at(QString username) {

@@ -34,6 +34,7 @@ Item {
                 height:hpercent(parent,20); width: wpercent(parent,100);
                 Row{
                     anchors.fill: parent
+                    spacing: wpercent(parent,10)
                     Text {
                         height:hpercent(parent,100); width: wpercent(parent,50);
                         font { pixelSize: hpercent(this,33); }
@@ -85,15 +86,13 @@ Item {
                     }
                 }
             }
-            Text {
-                id: currentFood
-                property string selectFood: ""
-                text: "Selected: " + selectFood
-                height:hpercent(parent,30); width: wpercent(parent,100);
-                font { pixelSize: hpercent(this,30) }
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                color:"#9E9E9E"
+            BButton {
+                height: hpercent(root,13) ; width: wpercent(root,35)
+                color: "white"
+                text: "Register Food"
+                anchors.horizontalCenter: parent.horizontalCenter
+                action.onClicked: stackPages.push(registerFoodComponent)
+
             }
         }
     }

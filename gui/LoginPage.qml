@@ -8,7 +8,7 @@ Item{
         id:stackViews
         clip: true
         anchors.fill: parent
-        initialItem: loginViewComponent
+        initialItem: _console.sessionOpen ? userViewComponent : loginViewComponent
         delegate:StackViewDelegate {
             function getTransition(properties) {
                 return (properties.enterItem.Stack.index % 2) ? horizontalTransition : verticalTransition

@@ -58,11 +58,11 @@ Item {
         }
         model: ListModel {
             id:settingsModel
-            ListElement { title:"Edit Profile"; type:"Account" }
-            ListElement { title:"Vibration"; type:"Account"; isSwitch: true}
-            ListElement { title:"Notifications"; type:"Account"; isSwitch: true}
-            ListElement { title:"About Us"; type:"settings" }
-            ListElement { title: "Log"; type:"settings" }
+            ListElement { title:"Edit Profile"; type:"Settings" }
+            ListElement { title:"Vibration"; type:"Settings"; isSwitch: true}
+            ListElement { title:"Notifications"; type:"Settings"; isSwitch: true}
+            ListElement { title:"About Us"; type:"Account" }
+            ListElement { title: "Log"; type:"Account" }
         }
     }
 }
