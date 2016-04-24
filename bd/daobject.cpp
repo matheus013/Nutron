@@ -10,10 +10,10 @@
 #include "../objects/users.h"
 
 DAObject::DAObject(){
-    connection = new Connection("data","admin","senha","172.20.9.185","QPSQL");
+    connection = new Connection("data_nutron","postgres","senha","localhost","QPSQL");
     if(!connection->startConnection()) qDebug() << "It was not possible to connect to the server";
     if(connection->getDataConnection().isOpen()) qDebug() << "Successfully connected!";
-    else qDebug() << "fail connect";
+    else qDebug() << connection->getDataConnection().lastError();
 }
 
 void DAObject::insert(QObject *object){

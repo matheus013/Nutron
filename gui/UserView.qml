@@ -6,6 +6,7 @@ Item{
         anchors.fill: parent
         id: personModel
         Row {
+            spacing: wpercent(parent,2)
             Image {
                 id: name
                 source: "https://image.freepik.com/icones-gratis/usuario-masculino-imagem-no-perfil_318-37825.jpg"
@@ -40,9 +41,6 @@ Item{
                 }
             }
         }
-        Row{
-
-        }
         ListView {
             height:hpercent(parent,40); width: wpercent(parent,100);
             model: _console.lastMeals
@@ -69,13 +67,22 @@ Item{
                 }
             }
         }
-        BButton{
+        Row{
+            spacing: wpercent(parent,2)
+            height: hpercent(root,8)
             anchors.horizontalCenter: parent.horizontalCenter
-            height: hpercent(root,13)
-            width: wpercent(root,25)
-            color: "white"
-            text: "Add meal"
-            //                    action.onClicked: stackPages.pop()
+            BButton{
+                height: hpercent(root,12)
+                width: wpercent(root,30)
+                color: "white"
+                text: "Add meal"
+            }
+            BButton{
+                height: hpercent(root,12)
+                width: wpercent(root,30)
+                color: "white"
+                text: "Disease"
+            }
         }
     }
 }
