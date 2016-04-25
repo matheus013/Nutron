@@ -13,6 +13,7 @@ Terminal::Terminal() {
     m_topTenUsers = new QQmlObjectListModel<User>();
     m_lastMeals = new QQmlObjectListModel<Food>();
     m_foodList = new QQmlObjectListModel<Food>();
+    m_foodFilter = new QQmlObjectListModel<Food>();
     set_sessionOpen(false);
     loadFood();
     loadUser();
@@ -113,11 +114,24 @@ void Terminal::saveFood() {
         daobject.update(*i,"foodid");
 }
 
+void Terminal::filter(QString reference) {
+    m_foodFilter->clear();
+    if(reference == "")
+        for (int i = 0; i < m_foodList->size(); ++i)
+            m_foodFilter->append(m_foodList->at(i));
+    else
+        for (int i = 0; i < m_foodList->size(); ++i){
+            QString var = m_foodList->at(i)->property("name").toString();
+            if(var.contains(reference,Qt::CaseInsensitive))
+                m_foodFilter->append(m_foodList->at(i));
+        }
+    qDebug() << m_foodFilter->size();
+}
+
 void Terminal::topTen() {
     m_topTenUsers->clear();
     int maxFor = (m_userList->size() < 10) ? m_userList->size() : 10;
     for(int i=0;i<maxFor;i++) m_topTenUsers->append(m_userList->at(i));
-    qDebug() << m_topTenUsers->size();
 }
 
 User *Terminal::at(QString username) {

@@ -3,6 +3,7 @@ import QtQuick.Controls 1.4
 
 Item {
     id: rootFood
+    Component.onCompleted: _console.filter("")
     Item{
         anchors.fill: parent
         Column{
@@ -29,7 +30,7 @@ Item {
                         height: hpercent(parent,12)
                         width: wpercent(parent,80)
                         event.onTextChanged:
-                            (text.length > 0 ) ? model.applyFilter(text): model.reload();
+                           _console.filter(text)
 
                     }
                     Item {
@@ -66,7 +67,7 @@ Item {
                         height:hpercent(parent,70); width: wpercent(parent,100);
                         ListView {
                             id: foodView
-                            model: _console.foodList
+                            model: _console.foodFilter
                             focus: true
                             clip: true
                             anchors.fill: parent

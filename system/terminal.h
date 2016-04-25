@@ -13,9 +13,10 @@ class Terminal : public QObject {
     QML_OBJMODEL_PROPERTY(User, topTenUsers)
     QML_OBJMODEL_PROPERTY(Food, lastMeals)
     QML_OBJMODEL_PROPERTY(Food, foodList)
-    QML_WRITABLE_PROPERTY(User*, currentUser)
-    QML_WRITABLE_PROPERTY(Food*, selectedFood)
-    QML_WRITABLE_PROPERTY(bool, sessionOpen)
+    QML_WRITABLE_PROPERTY(User* , currentUser)
+    QML_WRITABLE_PROPERTY(Food* , selectedFood)
+    QML_WRITABLE_PROPERTY(bool , sessionOpen)
+    QML_OBJMODEL_PROPERTY(Food ,foodFilter)
     DAObject daobject;
     static bool lessRank(const QObject *a,const QObject *b);
     User *at(QString username);
@@ -31,6 +32,9 @@ public:
     void loadFood();
     void saveUser();
     void saveFood();
+
+    Q_INVOKABLE void filter(QString reference);
+
     Q_INVOKABLE void topTen();
 
     Q_INVOKABLE bool login(QString username, QString password);
