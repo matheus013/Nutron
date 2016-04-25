@@ -74,6 +74,7 @@ void Terminal::loadUser() {
             user->set_password(query.value("password").toString());
             user->set_score(query.value("score").toInt());
             user->set_weight(query.value("weight").toDouble());
+            user->set_photo(query.value("photo").toString());
             m_userList->append(user);
         }
     }

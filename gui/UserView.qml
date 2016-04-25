@@ -1,5 +1,6 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.1
 
 Item{
     Column{
@@ -7,11 +8,20 @@ Item{
         id: personModel
         Row {
             spacing: wpercent(parent,2)
-            Image {
-                id: name
-                source: "https://image.freepik.com/icones-gratis/usuario-masculino-imagem-no-perfil_318-37825.jpg"
-                height: hpercent(root,30)
-                width: wpercent(root,30)
+            anchors.horizontalCenter: parent.horizontalCenter
+            Item {
+                height: hpercent(parent,80)
+                width: wpercent(parent,30)
+                anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    id: img
+                    source: _console.currentUser.photo
+                    anchors.fill: parent
+                }
+                MouseArea{
+                    anchors.fill: img
+                    onClicked: console.log("click")
+                }
             }
             Column {
                 anchors.verticalCenter: parent.verticalCenter
@@ -76,14 +86,17 @@ Item{
                 width: wpercent(root,30)
                 color: "white"
                 text: "Add meal"
+                action.onClicked: console.log("Add meal")
             }
             BButton{
                 height: hpercent(root,12)
                 width: wpercent(root,30)
                 color: "white"
                 text: "Disease"
+                action.onClicked: console.log("Disease")
             }
         }
     }
+
 }
 

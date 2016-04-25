@@ -16,6 +16,7 @@ User::User(const QObject *object) {
     set_height(object->property("height").toDouble());
     set_weight(object->property("weight").toDouble());
     set_name(object->property("name").toString());
+    set_photo(object->property("photo").toString());
 }
 
 User::User(QString username, QString password, QString name, QString email,
@@ -30,6 +31,7 @@ User::User(QString username, QString password, QString name, QString email,
     set_height(height);
     set_weight(weight);
     set_name(name);
+    set_photo("https://image.freepik.com/icones-gratis/usuario-masculino-imagem-no-perfil_318-37825.jpg");
 }
 
 bool User::isEmpty() {

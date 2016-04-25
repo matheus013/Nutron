@@ -9,13 +9,13 @@
 
 class Terminal : public QObject {
     Q_OBJECT
-    QML_OBJMODEL_PROPERTY(User,userList)
-    QML_OBJMODEL_PROPERTY(User,topTenUsers)
-    QML_OBJMODEL_PROPERTY(Food,lastMeals)
+    QML_OBJMODEL_PROPERTY(User, userList)
+    QML_OBJMODEL_PROPERTY(User, topTenUsers)
+    QML_OBJMODEL_PROPERTY(Food, lastMeals)
     QML_OBJMODEL_PROPERTY(Food, foodList)
     QML_WRITABLE_PROPERTY(User*, currentUser)
     QML_WRITABLE_PROPERTY(Food*, selectedFood)
-    QML_WRITABLE_PROPERTY(bool,sessionOpen)
+    QML_WRITABLE_PROPERTY(bool, sessionOpen)
     DAObject daobject;
     static bool lessRank(const QObject *a,const QObject *b);
     User *at(QString username);
