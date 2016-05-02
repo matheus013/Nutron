@@ -14,14 +14,20 @@ class User : public QObject{
     QML_WRITABLE_PROPERTY(int, level)
     QML_WRITABLE_PROPERTY(int, age)
     QML_WRITABLE_PROPERTY(int, score)
-    QML_WRITABLE_PROPERTY(double, height)
-    QML_WRITABLE_PROPERTY(double, weight)
+    QML_WRITABLE_PROPERTY(int, height)
+    QML_WRITABLE_PROPERTY(int, weight)
+
+    QML_WRITABLE_PROPERTY(bool, hypertension)
+    QML_WRITABLE_PROPERTY(bool, diabetes)
+    QML_WRITABLE_PROPERTY(bool, anemia)
+    QML_WRITABLE_PROPERTY(bool, high_cholesterol)
 
 public:
     User();
     User(const QObject* object);
+    User(QJsonObject obj);
     User(QString username, QString password, QString name, QString email,
-          int age, double height, double weight);
-    bool isEmpty();
+          int age, int height, int weight);
+    QString post();
 
 };

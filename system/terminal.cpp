@@ -1,13 +1,14 @@
-#include <QSqlQuery>
 #include <QDebug>
-#include <QSqlError>
 #include <QVariant>
 #include "terminal.h"
 #include "authenticate.h"
 #include "../objects/meal.h"
 #include "QQmlHelpers"
+#include <QJsonObject>
 
 Terminal::Terminal() {
+    QObject::connect(&web,SIGNAL(readFoodChanged(bool)),this,SLOT(loadFood(bool)));
+    QObject::connect(&web,SIGNAL(readUserChanged(bool)),this,SLOT(loadUser(bool)));
     m_currentUser = 0;
     m_userList = new QQmlObjectListModel<User>();
     m_topTenUsers = new QQmlObjectListModel<User>();
@@ -15,27 +16,13 @@ Terminal::Terminal() {
     m_foodList = new QQmlObjectListModel<Food>();
     m_foodFilter = new QQmlObjectListModel<Food>();
     set_sessionOpen(false);
-    loadFood();
-    loadUser();
+    web.loadFood();
+    web.loadUser();
     topTen();
+
 }
 
-void Terminal::loadLastMeals() {
-    QSqlQuery query;
-    m_lastMeals->clear();
-    QString tag = "SELECT * FROM historic_meals WHERE author = '" +
-            QString::number(get_currentUser()->get_user_id()) + '\'';
-    query.prepare(tag);
-    if(!query.exec())
-        qDebug() << query.lastError();
-    else{
-        while(query.next()) {
-            Food* food = (Food*) m_foodList->at(query.value("food").toInt() - 1);
-            m_lastMeals->append(food);
-        }
-    }
-    qDebug() << m_lastMeals->size();
-}
+void Terminal::loadLastMeals() {}
 
 bool Terminal::lessRank(const QObject *a, const QObject *b){
     return a->property("score") > b->property("score");
@@ -43,75 +30,49 @@ bool Terminal::lessRank(const QObject *a, const QObject *b){
 
 void Terminal::insertUser(QString username, QString password, QString name, QString email,
                           int age, double height, double weight) {
-    User * user = new User(username,password,name,email,age,height,weight);
-    daobject.insert(user);
-    loadUser();
+    User user(username,password,name,email,age,height,weight);
+    web.post(user.post());
+    web.loadUser();
 }
 
-void Terminal::insertFood(QString name, QString description, int calorificvalue,
-                          QString image, QString classification) {
-    Food * food = new Food(name,description,image,calorificvalue,classification);
-    daobject.insert(food);
-    loadFood();
+void Terminal::insertFood(QString name, int calorificvalue) {
+    Food food(name,calorificvalue);
+    web.post(food.post());
+    web.loadFood();
 }
 
-void Terminal::loadUser() {
-    QSqlQuery query;
-    m_userList->clear();
-    query.prepare( "SELECT * FROM nutron_user" );
-    if(!query.exec()) {
-        qDebug() << query.lastError();
-    }
-    else{
-        while(query.next()) {
-            User * user = new User();
-            user->set_username(query.value("username").toString());
-            user->set_age(query.value("age").toInt());
-            user->set_email(query.value("email").toString());
-            user->set_height(query.value("height").toDouble());
-            user->set_user_id(query.value("user_id").toInt());
-            user->set_level(query.value("level").toInt());
-            user->set_name(query.value("name").toString());
-            user->set_password(query.value("password").toString());
-            user->set_score(query.value("score").toInt());
-            user->set_weight(query.value("weight").toDouble());
-            user->set_photo(query.value("photo").toString());
+void Terminal::loadUser(bool isRead) {
+    qDebug() << "CALL" << isRead;
+    if(isRead){
+        m_userList->clear();
+        QJsonArray jArray = web.getDataUser();
+        for (int i = 0; i < jArray.size(); ++i) {
+            User * user = new User(jArray[i].toObject());
             m_userList->append(user);
         }
+        qSort(m_userList->begin(), m_userList->end(),Terminal::lessRank);
+        topTen();
+        web.set_readUser(false);
     }
-    qSort(m_userList->begin(),m_userList->end(),Terminal::lessRank);
-    topTen();
 }
 
-void Terminal::loadFood() {
-    QSqlQuery query;
-    query.clear();
-    query.prepare( "SELECT * FROM nutron_food" );
-    if(!query.exec()) {
-        qDebug() << query.lastError();
-    }
-    else{
-        while(query.next()) {
-            Food* food = new Food();
-            food->set_food_id(query.value("food_id").toInt());
-            food->set_name(query.value("name").toString());
-            food->set_calorificvalue(query.value("calorificvalue").toInt());
-            food->set_classification(query.value("classification").toString());
-            food->set_description(query.value("description").toString());
-            food->set_image(query.value("image").toString());
+void Terminal::loadFood(bool isRead) {
+    qDebug() << "CALL" << isRead;
+    if(isRead){
+        m_foodList->clear();
+        QJsonArray jArray = web.getDataFood();
+        for (int i = 0; i < jArray.size(); ++i) {
+            Food * food = new Food(jArray[i].toObject());
             m_foodList->append(food);
         }
+        web.set_readFood(false);
     }
 }
 
 void Terminal::saveUser() {
-    for (int i = 0; i < m_userList->size(); i++)
-        daobject.update(m_userList->get(i),"userid");
 }
 
 void Terminal::saveFood() {
-    for (QQmlObjectListModel<Food>::iterator i = m_foodList->begin(); i != m_foodList->end(); ++i)
-        daobject.update(*i,"foodid");
 }
 
 void Terminal::filter(QString reference) {
@@ -125,7 +86,6 @@ void Terminal::filter(QString reference) {
             if(var.contains(reference,Qt::CaseInsensitive))
                 m_foodFilter->append(m_foodList->at(i));
         }
-    qDebug() << m_foodFilter->size();
 }
 
 void Terminal::topTen() {
@@ -174,7 +134,6 @@ bool Terminal::registerMeal() {
     QString format = "t hh:mm:ss dd-MM-yyyy";
     Meal *meal = new Meal(local.toString(format), m_currentUser->get_user_id(),
                           m_selectedFood->get_food_id());
-    daobject.insert(meal);
     loadLastMeals();
     return true;
 }

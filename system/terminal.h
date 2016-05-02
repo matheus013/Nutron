@@ -4,8 +4,8 @@
 #include <QList>
 #include "../objects/users.h"
 #include "../objects/food.h"
-#include "../bd/daobject.h"
 #include "assets/cpp/qqmlobjectlistmodel.h"
+#include "../bd/webmanager.h"
 
 class Terminal : public QObject {
     Q_OBJECT
@@ -17,7 +17,7 @@ class Terminal : public QObject {
     QML_WRITABLE_PROPERTY(Food* , selectedFood)
     QML_WRITABLE_PROPERTY(bool , sessionOpen)
     QML_OBJMODEL_PROPERTY(Food ,foodFilter)
-    DAObject daobject;
+    WebManager web;
     static bool lessRank(const QObject *a,const QObject *b);
     User *at(QString username);
 public:
@@ -25,11 +25,8 @@ public:
 
     Q_INVOKABLE void insertUser(QString username, QString password, QString name, QString email,
                                 int age = 0, double height = 0, double weight = 0);
-    Q_INVOKABLE void insertFood(QString name, QString description, int calorificvalue,
-                                QString image, QString classification);
+    Q_INVOKABLE void insertFood(QString name, int calorificvalue);
 
-    void loadUser();
-    void loadFood();
     void saveUser();
     void saveFood();
 
@@ -47,5 +44,9 @@ public:
     Q_INVOKABLE bool registerMeal();
 
     void loadLastMeals();
+
+public slots:
+    void loadFood(bool isRead);
+    void loadUser(bool isRead);
 };
 

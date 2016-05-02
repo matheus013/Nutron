@@ -5,6 +5,7 @@
 #include <QList>
 #include "system/terminal.h"
 #include "system/authenticate.h"
+#include "bd/webmanager.h"
 
 int main(int argc, char *argv[]){
     QGuiApplication app(argc, argv);
@@ -18,6 +19,9 @@ int main(int argc, char *argv[]){
     ctx->setContextProperty("_console",&console);
     ctx->setContextProperty("_authenticate",&validate);
     engine.load(QUrl(QStringLiteral("qrc:/gui/main.qml")));
+    //    WebManager web;
+    //    web.loadUser();
+    //    web.loadFood();
     return app.exec();
 }
 

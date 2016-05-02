@@ -36,32 +36,6 @@ Item {
             height: hpercent(parent,10)
             width: hpercent(parent,80)
         }
-        TextLine{
-            id: description
-            placeholder: "Description"
-            height: hpercent(parent,10)
-            width: hpercent(parent,80)
-        }
-        TextLine{
-            id: image
-            placeholder: "Image"
-            height: hpercent(parent,10)
-            width: hpercent(parent,80)
-        }
-        Row{
-            Text{
-                height:classification.height ; width: data.width - classification.width*1.2
-                font { pixelSize: hpercent(this,55); bold:true }
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                text:"Classification"; color:"#9E9E9E"
-            }
-
-            ComboBox {
-                id: classification
-                model: ["F","E","D","C","B","A","SS"]
-            }
-        }
         Row{
             spacing: wpercent(parent,8)
             BButton{
@@ -70,8 +44,7 @@ Item {
                 color: "white"
                 text: "Confirm"
                 action.onClicked: {
-                    _console.insertFood(name.text,description.text,
-                                        calorificvalue.text,image.text,classification.currentText)
+                    _console.insertFood(name.text,calorificvalue.text)
                     invalidRegisterPopUp("Successfully registered food")
                     stackPages.pop()
                 }
