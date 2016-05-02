@@ -4,7 +4,9 @@
 #include <QSqlError>
 #include <QVariant>
 
-Authenticate::Authenticate(){}
+Authenticate::Authenticate(QQmlObjectListModel<User> *model){
+    this->model = model;
+}
 
 bool Authenticate::isEmailAddress(QString email) {
     if ( email.length() == 0 ) return false;
@@ -14,40 +16,24 @@ bool Authenticate::isEmailAddress(QString email) {
 }
 
 bool Authenticate::loginIsValid(QString username, QString password) {
-    QSqlQuery query;
-    query.prepare( "SELECT * FROM nutron_user" );
-    if(!query.exec())
-        qDebug() << query.lastError();
-    else
-        while(query.next())
-            if(query.value("username").toString() == username){
-                if(query.value("password").toString() == password) return true;
-                else return false;
-            }
+    for (int i = 0; i < model->size(); ++i) {
+        if(model->at(i)->get_username() == username &&
+                model->at(i)->get_password() == password) return true;
+    }
     return false;
 }
 
 bool Authenticate::usernameValid(QString username) {
     if(username.length() < 6 || username.length() > 20) return false;
-    QSqlQuery query;
-    query.prepare( "SELECT * FROM nutron_user" );
-    if(!query.exec())
-        qDebug() << query.lastError();
-    else
-        while(query.next())
-            if(query.value("username").toString() == username)
-                return false;
+    for (int i = 0; i < model->size(); ++i) {
+        if(model->at(i)->get_username() == username) return false;
+    }
     return true;
 }
 
 bool Authenticate::emailValid(QString email) {
-    QSqlQuery query;
-    query.prepare( "SELECT * FROM nutron_user" );
-    if(!query.exec())
-        qDebug() << query.lastError();
-    else
-        while(query.next())
-            if(query.value("email").toString() == email)
-                return false;
+    for (int i = 0; i < model->size(); ++i) {
+        if(model->at(i)->get_email() == email) return false;
+    }
     return true;
 }

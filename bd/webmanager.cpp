@@ -29,11 +29,14 @@ void WebManager::getUsers() {
 void WebManager::post(QString url) {
     QNetworkRequest request( QUrl( QString("http://localhost:8080/" + url) ) );
     manager->get(request);
+    if(url.contains("new_food/")) loadFood();
+    if(url.contains("new_user/")) loadUser();
 }
 
 
 void WebManager::loadUser() {
     getUsers();
+    qDebug() << "Reload";
 }
 
 void WebManager::loadFood() {

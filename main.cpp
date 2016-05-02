@@ -15,13 +15,10 @@ int main(int argc, char *argv[]){
     QQmlContext *ctx = engine.rootContext();
 
     Terminal console;
-    Authenticate validate;
+    Authenticate validate(console.get_userList());
     ctx->setContextProperty("_console",&console);
     ctx->setContextProperty("_authenticate",&validate);
     engine.load(QUrl(QStringLiteral("qrc:/gui/main.qml")));
-    //    WebManager web;
-    //    web.loadUser();
-    //    web.loadFood();
     return app.exec();
 }
 

@@ -32,17 +32,14 @@ void Terminal::insertUser(QString username, QString password, QString name, QStr
                           int age, double height, double weight) {
     User user(username,password,name,email,age,height,weight);
     web.post(user.post());
-    web.loadUser();
 }
 
 void Terminal::insertFood(QString name, int calorificvalue) {
     Food food(name,calorificvalue);
     web.post(food.post());
-    web.loadFood();
 }
 
 void Terminal::loadUser(bool isRead) {
-    qDebug() << "CALL" << isRead;
     if(isRead){
         m_userList->clear();
         QJsonArray jArray = web.getDataUser();
@@ -57,7 +54,6 @@ void Terminal::loadUser(bool isRead) {
 }
 
 void Terminal::loadFood(bool isRead) {
-    qDebug() << "CALL" << isRead;
     if(isRead){
         m_foodList->clear();
         QJsonArray jArray = web.getDataFood();
@@ -102,7 +98,7 @@ User *Terminal::at(QString username) {
 }
 
 bool Terminal::login(QString username, QString password) {
-    Authenticate validate;
+    Authenticate validate(m_userList);
     if(!validate.loginIsValid(username,password)) return m_sessionOpen;
     set_currentUser(at(username));
     loadLastMeals();

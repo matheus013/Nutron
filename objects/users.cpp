@@ -51,7 +51,7 @@ User::User(QString username, QString password, QString name, QString email,
     set_height(height);
     set_weight(weight);
     set_name(name);
-    set_photo("https://image.freepik.com/icones-gratis/usuario-masculino-imagem-no-perfil_318-37825.jpg");
+    set_photo("def.jpg");
     set_diabetes(0);
     set_high_cholesterol(0);
     set_anemia(0);
@@ -60,6 +60,11 @@ User::User(QString username, QString password, QString name, QString email,
 
 
 QString User::post() {
-
+    return "new_user/" + get_username() + '/' + get_password() + '/' +
+            get_name() + '/' + get_email() + '/' + get_photo() + '/' + QString::number(get_level()) + '/' +
+            QString::number(get_age()) + '/' + QString::number(get_height()) + '/' +
+            QString::number(get_weight()) + '/' + QString::number(get_score()) + '/' +
+            QString::number(get_diabetes()) + '/' + QString::number(get_hypertension()) + '/' +
+            QString::number(get_high_cholesterol()) + '/' + QString::number(get_anemia()) + '/';
 }
 
