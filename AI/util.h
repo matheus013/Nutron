@@ -1,14 +1,14 @@
 #pragma once
 #include <QObject>
-#include "food.h"
+#include "objects/food.h"
 
-class MathUtil : public QObject {
+class Util : public QObject {
     Q_OBJECT
     enum{
 
     };
 public:
-    MathUtil();
+    Util();
     double standardDeviation(QVector<double> vector);
     double average(QVector<double> vector);
     double sum(QVector<double> vector);

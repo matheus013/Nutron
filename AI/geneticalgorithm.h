@@ -6,6 +6,7 @@
 #include "objects/users.h"
 #include "objects/food.h"
 #include "assets/cpp/qqmlobjectlistmodel.h"
+#include "util.h"
 
 typedef QVector<Food*> Data;
 typedef QVector< QVector<Food*> > Week;
@@ -18,6 +19,7 @@ class GeneticAlgorithm : public QObject {
     int m_populationSize;
     int m_calories;
     int m_mealPerDay;
+    Util util;
 public:
     GeneticAlgorithm();
     GeneticAlgorithm(int mealPerDay, int calories, QQmlObjectListModel<Food> *base, User * user);
