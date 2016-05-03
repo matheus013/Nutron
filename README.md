@@ -1,6 +1,6 @@
-# QPriorityQueue
+# WebService
 
-from https://github.com/iksaif/qpriorityqueue
+from https://github.com/matheus013/service-web
 
 # Custom Components
 
@@ -10,9 +10,12 @@ from https://github.com/BrunoGeorgevich/BrunoComponents
 
 from http://www.flaticon.com/
 
-# Qt
+# Technology
 
-Qt 5.5.1
+Qt 5.6.0
+c++ 11
+python 2.7
+DJango 
 
 # Author
 - Matheus Inácio Batista Santos
