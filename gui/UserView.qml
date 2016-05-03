@@ -15,7 +15,7 @@ Item{
                 anchors.verticalCenter: parent.verticalCenter
                 Image {
                     id: img
-                    source: _console.currentUser.photo
+                    source: "qrc:/img/icons/profile29.png"
                     anchors.fill: parent
                 }
                 MouseArea{
