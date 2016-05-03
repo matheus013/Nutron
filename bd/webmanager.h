@@ -26,7 +26,6 @@ public:
 
 private:
     QJsonArray convert(QString str);
-    QQmlObjectListModel<QObject> * modeList;
     QNetworkAccessManager * manager;
     QJsonArray dataFood;
     QJsonArray dataUser;

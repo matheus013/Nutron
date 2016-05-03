@@ -27,7 +27,6 @@ HEADERS += \
     system/terminal.h \
     system/authenticate.h \
     objects/meal.h \
-    system/action.h \
     assets/cpp/qqmlobjectlistmodel.h \
     bd/webmanager.h \
     objects/diet.h \

@@ -4,9 +4,6 @@
 
 class Util : public QObject {
     Q_OBJECT
-    enum{
-
-    };
 public:
     Util();
     double standardDeviation(QVector<double> vector);

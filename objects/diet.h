@@ -1,8 +1,9 @@
 #pragma once
 
 #include <QObject>
-#include "./assets/cpp/qqmlobjectlistmodel.h"
+#include <QVector>
 #include <QString>
+#include "./assets/cpp/qqmlobjectlistmodel.h"
 #include "food.h"
 
 class Diet : public QObject {
@@ -16,5 +17,7 @@ class Diet : public QObject {
     QML_OBJMODEL_PROPERTY(Food, saturday)
 public:
     Diet();
+    Diet(QVector< QVector<Food*> > week);
+    void load(QVector< QVector<Food*> > week);
 
 };

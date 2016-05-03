@@ -46,7 +46,7 @@ Item{
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             color:"#9E9E9E"
-                            text:name
+                            text: name
                         }
                         Text {
                             height:hpercent(parent,100); width: wpercent(parent,50);

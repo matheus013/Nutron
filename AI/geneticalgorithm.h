@@ -22,14 +22,15 @@ class GeneticAlgorithm : public QObject {
     Util util;
 public:
     GeneticAlgorithm();
-    GeneticAlgorithm(int mealPerDay, int calories, QQmlObjectListModel<Food> *base, User * user);
+    GeneticAlgorithm(int mealPerDay, int calories, QVector<Food *> base, const User * user);
     void run();
     void print();
+    Week get();
 private:
     void cross();
     void buildPopulation();
     void mutation();
-    int adaptation(QVector<Food *> gene);
+    int adaptation(Data gene);
     int score(Food *reference);
     int harmony(QBitArray reference, int i = 0);
     bool rating();

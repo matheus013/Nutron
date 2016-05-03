@@ -5,6 +5,8 @@
 #include "../objects/meal.h"
 #include "QQmlHelpers"
 #include <QJsonObject>
+#include "./AI/geneticalgorithm.h"
+#include <QVector>
 
 Terminal::Terminal() {
     QObject::connect(&web,SIGNAL(readFoodChanged(bool)),this,SLOT(loadFood(bool)));
@@ -15,6 +17,7 @@ Terminal::Terminal() {
     m_lastMeals = new QQmlObjectListModel<Food>();
     m_foodList = new QQmlObjectListModel<Food>();
     m_foodFilter = new QQmlObjectListModel<Food>();
+    m_diet = new Diet();
     set_sessionOpen(false);
     web.loadFood();
     web.loadUser();
@@ -69,8 +72,6 @@ void Terminal::loadFood(bool isRead) {
     }
 }
 
-void Terminal::saveUser() {}
-void Terminal::saveFood() {}
 
 void Terminal::filter(QString reference) {
     m_foodFilter->clear();
@@ -113,7 +114,14 @@ void Terminal::logout() {
 }
 
 void Terminal::buildDiet() {
-
+    if(get_sessionOpen()){
+        QVector<Food *> base;
+        for (int i = 0; i < m_foodList->size(); ++i)
+            base << m_foodList->at(i);
+        GeneticAlgorithm * ag = new GeneticAlgorithm(6, 2000, base, m_currentUser);
+        ag->run();
+        m_diet->load(ag->get());
+    } else qDebug() << "fazer login";
 }
 
 bool Terminal::selectFood(int id) {

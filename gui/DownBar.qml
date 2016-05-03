@@ -42,6 +42,9 @@ Item {
                 radius: 10
                 color: "#FFF"
                 image.source: "qrc:/img/icons/body-parts71.png"
+                action.onClicked: {
+                    stackPages.push(dietComponent)
+                }
             }
             ImageButton{
                 height: hpercent(backRect,90)

@@ -47,10 +47,10 @@ QString Food::update() {
 }
 
 QBitArray Food::info() const {
-    QBitArray bit;
-    bit.resize(4);
+    QBitArray bit(4);
     bit.setBit(3, (bool) get_anemia());
     bit.setBit(2, (bool) get_diabetes());
     bit.setBit(1, (bool) get_high_cholesterol());
     bit.setBit(0, (bool) get_hypertension());
+    return bit;
 }

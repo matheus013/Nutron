@@ -17,22 +17,22 @@ WebManager::WebManager() {
 }
 
 void WebManager::getFoods() {
-    QNetworkRequest request( QUrl("http://localhost:8080/get_foods") );
+    QNetworkRequest request( QUrl("http://192.168.0.104:8080/get_foods") );
     manager->get(request);
 }
 
 void WebManager::getUsers() {
-    QNetworkRequest request( QUrl("http://localhost:8080/get_users") );
+    QNetworkRequest request( QUrl("http://192.168.0.104:8080/get_users") );
     manager->get(request);
 }
 
 void WebManager::post(QString url) {
-    QNetworkRequest request( QUrl( QString("http://localhost:8080/" + url) ) );
+    QNetworkRequest request( QUrl( QString("http://192.168.0.104:8080/" + url) ) );
     manager->get(request);
 }
 
 void WebManager::update(QString url) {
-    QNetworkRequest request( QUrl( QString("http://localhost:8080/" + url) ) );
+    QNetworkRequest request( QUrl( QString("http://192.168.0.104:8080/" + url) ) );
     manager->get(request);
 }
 
