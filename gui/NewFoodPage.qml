@@ -37,6 +37,16 @@ Item {
             width: hpercent(parent,80)
         }
         Row{
+            height: hpercent(parent,20)
+            width: wpercent(parent,100)
+            Item {
+                CheckBox{}
+            }
+            Item {
+                CheckBox{}
+            }
+        }
+        Row{
             spacing: wpercent(parent,8)
             BButton{
                 height: hpercent(root,13)

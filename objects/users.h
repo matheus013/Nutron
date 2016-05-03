@@ -27,7 +27,7 @@ public:
     User(const QObject* object);
     User(QJsonObject obj);
     User(QString username, QString password, QString name, QString email,
-          int age, int height, int weight);
+          int age, int height, int weight, int diabetes = 0, int high_cholesterol = 0, int anemia = 0, int hypertension = 0);
     QString post();
-
+    QString update();
 };

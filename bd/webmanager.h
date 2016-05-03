@@ -17,6 +17,7 @@ public:
     void getFoods();
     void getUsers();
     void post(QString url);
+    void update(QString url);
     void loadUser();
     void loadFood();
     QJsonArray getDataFood() const;

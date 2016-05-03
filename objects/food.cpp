@@ -1,11 +1,13 @@
 #include "food.h"
 #include <QDebug>
+#include <QBitArray>
 
 Food::Food(){
     setObjectName("nutron_food");
 }
 
 Food::Food(QJsonObject obj) {
+    set_food_id(obj["id"].toInt());
     set_name(obj["name"].toString());
     set_calorificvalue(obj["calorific_value"].toInt());
     set_diabetes(obj["diabetes"].toBool());
@@ -36,4 +38,19 @@ QString Food::post() {
     return "new_food/" + get_name() + '/' + QString::number(get_calorificvalue()) + '/' + QString::number((int)get_diabetes())
             + '/' + QString::number((int)get_hypertension()) + '/' + QString::number((int)get_high_cholesterol()) +
             '/' + QString::number((int)get_anemia()) + '/';
+}
+
+QString Food::update() {
+    return "new_food/" + QString::number(get_food_id()) + '/' + get_name() + '/' + QString::number(get_calorificvalue()) + '/' + QString::number((int)get_diabetes())
+            + '/' + QString::number((int)get_hypertension()) + '/' + QString::number((int)get_high_cholesterol()) +
+            '/' + QString::number((int)get_anemia()) + '/';
+}
+
+QBitArray Food::info() const {
+    QBitArray bit;
+    bit.resize(4);
+    bit.setBit(3, (bool) get_anemia());
+    bit.setBit(2, (bool) get_diabetes());
+    bit.setBit(1, (bool) get_high_cholesterol());
+    bit.setBit(0, (bool) get_hypertension());
 }

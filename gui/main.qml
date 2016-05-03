@@ -20,7 +20,8 @@ ApplicationWindow {
             id: stackPages
             height: hpercent(root,85)
             width: wpercent(root,100)
-            initialItem: loginComponent
+//            initialItem: loginComponent
+            initialItem: dietComponent
         }
         DownBar{
             height: hpercent(root,15)
@@ -51,6 +52,11 @@ ApplicationWindow {
         id: registerFoodComponent
         NewFoodPage{}
     }
+    Component {
+        id: dietComponent
+        DietView{}
+    }
+
     PopUpWindow{
         id:popUpLogin
         rectHeight: hpercent(root,8)

@@ -37,6 +37,8 @@ public:
     Q_INVOKABLE bool login(QString username, QString password);
     Q_INVOKABLE void logout();
 
+    Q_INVOKABLE void buildDiet();
+
     Q_INVOKABLE bool selectFood(int id);
 
     void printCurrent();

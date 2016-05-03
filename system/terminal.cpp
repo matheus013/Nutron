@@ -30,13 +30,17 @@ bool Terminal::lessRank(const QObject *a, const QObject *b){
 
 void Terminal::insertUser(QString username, QString password, QString name, QString email,
                           int age, double height, double weight) {
-    User user(username,password,name,email,age,height,weight);
-    web.post(user.post());
+    User * user = new User(username,password,name,email,age,height,weight);
+    m_userList->append(user);
+    web.post(user->post());
+    topTen();
 }
 
 void Terminal::insertFood(QString name, int calorificvalue) {
-    Food food(name,calorificvalue);
-    web.post(food.post());
+    Food * food = new Food(name,calorificvalue);
+    m_foodList->append(food);
+    web.post(food->post());
+    filter("");
 }
 
 void Terminal::loadUser(bool isRead) {
@@ -65,11 +69,8 @@ void Terminal::loadFood(bool isRead) {
     }
 }
 
-void Terminal::saveUser() {
-}
-
-void Terminal::saveFood() {
-}
+void Terminal::saveUser() {}
+void Terminal::saveFood() {}
 
 void Terminal::filter(QString reference) {
     m_foodFilter->clear();
@@ -109,6 +110,10 @@ bool Terminal::login(QString username, QString password) {
 void Terminal::logout() {
     m_currentUser = new User();
     set_sessionOpen(false);
+}
+
+void Terminal::buildDiet() {
+
 }
 
 bool Terminal::selectFood(int id) {

@@ -16,5 +16,6 @@
         <file>gui/HomePage.qml</file>
         <file>gui/ConfigPage.qml</file>
         <file>gui/NewFoodPage.qml</file>
+        <file>gui/DietView.qml</file>
     </qresource>
 </RCC>

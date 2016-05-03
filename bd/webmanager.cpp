@@ -29,14 +29,16 @@ void WebManager::getUsers() {
 void WebManager::post(QString url) {
     QNetworkRequest request( QUrl( QString("http://localhost:8080/" + url) ) );
     manager->get(request);
-    if(url.contains("new_food/")) loadFood();
-    if(url.contains("new_user/")) loadUser();
+}
+
+void WebManager::update(QString url) {
+    QNetworkRequest request( QUrl( QString("http://localhost:8080/" + url) ) );
+    manager->get(request);
 }
 
 
 void WebManager::loadUser() {
     getUsers();
-    qDebug() << "Reload";
 }
 
 void WebManager::loadFood() {
@@ -75,9 +77,6 @@ void WebManager::replyFinished(QNetworkReply * reply) {
                 dataUser = convert(response);
                 set_readUser(true);
             }
-            qDebug() << "GET successfully concluded";
-        } else {
-            qDebug() << "POST successfully concluded";
         }
     }
 }

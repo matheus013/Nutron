@@ -1,7 +1,5 @@
 #include "authenticate.h"
-#include <QSqlQuery>
 #include <QDebug>
-#include <QSqlError>
 #include <QVariant>
 
 Authenticate::Authenticate(QQmlObjectListModel<User> *model){

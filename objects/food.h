@@ -20,4 +20,6 @@ public:
     Food(QString name, int calorificValue);
     void setDiseases(int hypertension,int diabetes,int anemia, int high_cholesterol);
     QString post();
+    QString update();
+    QBitArray info() const;
 };

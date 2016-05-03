@@ -1,4 +1,4 @@
-QT += core sql quick
+QT += core network quick
 QT -= gui
 
 CONFIG += c++11
@@ -16,7 +16,10 @@ SOURCES += main.cpp \
     system/authenticate.cpp \
     objects/meal.cpp \
     assets/cpp/qqmlobjectlistmodel.cpp \
-    bd/webmanager.cpp
+    bd/webmanager.cpp \
+    objects/diet.cpp \
+    AI/geneticalgorithm.cpp \
+    AI/util.cpp
 
 HEADERS += \
     objects/users.h \
@@ -26,7 +29,10 @@ HEADERS += \
     objects/meal.h \
     system/action.h \
     assets/cpp/qqmlobjectlistmodel.h \
-    bd/webmanager.h
+    bd/webmanager.h \
+    objects/diet.h \
+    AI/geneticalgorithm.h \
+    AI/util.h
 
 RESOURCES += \
     qrc.qrc \

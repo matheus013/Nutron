@@ -22,6 +22,7 @@ User::User(const QObject *object) {
 }
 
 User::User(QJsonObject obj) {
+    set_user_id(obj["id"].toInt());
     set_username(obj["username"].toString());
     set_password(obj["password"].toString());
     set_email(obj["email"].toString());
@@ -40,7 +41,7 @@ User::User(QJsonObject obj) {
 }
 
 User::User(QString username, QString password, QString name, QString email,
-             int age, int height, int weight){
+           int age, int height, int weight, int diabetes, int high_cholesterol, int anemia, int hypertension){
     setObjectName("nutron_user");
     set_level(0);
     set_score(0);
@@ -52,15 +53,24 @@ User::User(QString username, QString password, QString name, QString email,
     set_weight(weight);
     set_name(name);
     set_photo("def.jpg");
-    set_diabetes(0);
-    set_high_cholesterol(0);
-    set_anemia(0);
-    set_hypertension(0);
+    set_diabetes(diabetes);
+    set_high_cholesterol(high_cholesterol);
+    set_anemia(anemia);
+    set_hypertension(hypertension);
 }
 
 
 QString User::post() {
     return "new_user/" + get_username() + '/' + get_password() + '/' +
+            get_name() + '/' + get_email() + '/' + get_photo() + '/' + QString::number(get_level()) + '/' +
+            QString::number(get_age()) + '/' + QString::number(get_height()) + '/' +
+            QString::number(get_weight()) + '/' + QString::number(get_score()) + '/' +
+            QString::number(get_diabetes()) + '/' + QString::number(get_hypertension()) + '/' +
+            QString::number(get_high_cholesterol()) + '/' + QString::number(get_anemia()) + '/';
+}
+
+QString User::update() {
+    return "new_user/" + QString::number(get_user_id()) + get_username() + '/' + get_password() + '/' +
             get_name() + '/' + get_email() + '/' + get_photo() + '/' + QString::number(get_level()) + '/' +
             QString::number(get_age()) + '/' + QString::number(get_height()) + '/' +
             QString::number(get_weight()) + '/' + QString::number(get_score()) + '/' +
