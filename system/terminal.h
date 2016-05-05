@@ -46,6 +46,7 @@ public:
     Q_INVOKABLE bool registerMeal();
 
     void loadLastMeals();
+    Q_INVOKABLE void update(QString name,int age,int weight,int height);
 
 public slots:
     void loadFood(bool isRead);

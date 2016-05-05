@@ -70,7 +70,7 @@ QString User::post() {
 }
 
 QString User::update() {
-    return "new_user/" + QString::number(get_user_id()) + get_username() + '/' + get_password() + '/' +
+    return "update_user/" + QString::number(get_user_id()) + '/' + get_username() + '/' + get_password() + '/' +
             get_name() + '/' + get_email() + '/' + get_photo() + '/' + QString::number(get_level()) + '/' +
             QString::number(get_age()) + '/' + QString::number(get_height()) + '/' +
             QString::number(get_weight()) + '/' + QString::number(get_score()) + '/' +

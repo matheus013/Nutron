@@ -27,6 +27,14 @@ Terminal::Terminal() {
 
 void Terminal::loadLastMeals() {}
 
+void Terminal::update(QString name, int age, int weight, int height) {
+    m_currentUser->set_name(name);
+    m_currentUser->set_age(age);
+    m_currentUser->set_weight(weight);
+    m_currentUser->set_height(height);
+    web.update(m_currentUser->update());
+}
+
 bool Terminal::lessRank(const QObject *a, const QObject *b){
     return a->property("score") > b->property("score");
 }

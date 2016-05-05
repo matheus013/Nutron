@@ -56,6 +56,10 @@ ApplicationWindow {
         id: dietComponent
         DietView{}
     }
+    Component {
+        id: editComponent
+        EditProfile{}
+    }
 
     PopUpWindow{
         id:popUpLogin

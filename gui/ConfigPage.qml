@@ -42,6 +42,11 @@ Item {
                     switch (textModel.text) {
                     case "Edit Profile":
                         console.log(title)
+                        if(_console.sessionOpen) {
+                            stackPages.push(editComponent)
+                        } else invalidRegisterPopUp("Sessionless.")
+
+
                         break;
                     case "About Us":
                         console.log(1)
